@@ -1,0 +1,6 @@
+modules:
+  - shared
+  - jvm
+  - linux
+  - macos
+  - windows

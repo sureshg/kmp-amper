@@ -1,0 +1,6 @@
+product:
+  type: macos/app
+  platforms: [ macosX64, macosArm64 ]
+
+dependencies:
+  - ../shared
