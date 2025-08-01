@@ -6,6 +6,10 @@ settings:
   jvm:
     release: 21
     storeParameterNames: true
+  java:
+    freeCompilerArgs:
+      - --enable-preview
+      - -Xlint:all
   kotlin:
     languageVersion: 2.2
     progressiveMode: true
@@ -35,16 +39,88 @@ settings:
       - kotlin.uuid.ExperimentalUuidApi
       - kotlin.concurrent.atomics.ExperimentalAtomicApi
     serialization:
-      version: 1.8.1
+      version: 1.9.0
       format: json
   ktor:
     version: 3.2.2
 
+settings@jvm:
+  kotlin:
+    freeCompilerArgs:
+      - -Xjdk-release=21
+      - -Xjvm-enable-preview
+      - -Xadd-modules=ALL-MODULE-PATH
+      - -Xjsr305=strict
+      - -Xjvm-default=all
+      - -Xassertions=jvm
+      - -Xemit-jvm-type-annotations
+      - -Xjspecify-annotations=strict
+      - -Xno-param-assertions
+      - -Xno-call-assertions
+      - -Xno-receiver-assertions
+      # - -Xmodule-path=
+      # - -Xjavac-arguments="--add-exports java.base/sun.nio.ch=ALL-UNNAMED"
+      # - -Xexplicit-api=strict  # Options: strict|warning|disable
+      # - -Xgenerate-strict-metadata-version
+
+settings@native:
+  kotlin:
+    optIns:
+      - kotlinx.cinterop.ExperimentalForeignApi
+      - kotlin.experimental.ExperimentalNativeApi
+
 dependencies:
-  - $libs.ktor.serialization.json
+  - bom: $libs.kotlin.bom
+  - bom: $libs.kotlinx.coroutines.bom
+  - bom: $libs.kotlinx.serialization.bom
+  - bom: $libs.ktor.bom
+  - bom: $libs.kotlin.wrappers.bom
+  - $libs.kotlinx.coroutines.core: exported
+  - $libs.kotlinx.datetime: exported
+  - $libs.kotlinx.io.core: exported
+  - $libs.kotlinx.serialization.json: exported
+  - $libs.kotlinx.serialization.json.io: exported
+  - $libs.kotlin.retry: exported
+  - $libs.kotlin.logging: exported
+  - $libs.ktor.client.core: exported
+  - $libs.ktor.client.cio: exported
+  - $libs.ktor.client.content.negotiation: exported
+  - $libs.ktor.client.encoding: exported
+  - $libs.ktor.client.logging: exported
+  - $libs.ktor.client.resources: exported
+  - $libs.ktor.client.auth: exported
+  - $libs.ktor.client.serialization: exported
+  - $libs.ktor.client.websockets: exported
+  - $libs.ktor.serialization.json: exported
+
+dependencies@jvm:
+  - $libs.ktor.client.java: exported
+  - $libs.slf4j.api: exported
+  - $libs.kotlinx.coroutines.slf4j: exported
+  - $libs.jspecify: exported
 
 dependencies@native:
-  - $libs.ktor.client.curl
+  - $libs.ktor.client.curl: exported
+
+test-settings:
+  junit: junit-5
+  kotlin:
+    powerAssert:
+      enabled: true
+      functions: [ kotlin.assert, kotlin.test.assertTrue, kotlin.test.assertEquals, kotlin.test.assertNull, kotlin.require ]
+
+test-dependencies:
+  - $libs.kotlin.test: exported
+  - $libs.kotlinx.coroutines.test: exported
+  - $libs.ktor.client.mock: exported
 
 test-dependencies@jvm:
-  - $kotlin.test.junit5
+  - bom: $libs.junit.bom
+  - bom: $libs.testcontainers.bom
+  - $libs.kotlin.test.junit5: exported
+  - $libs.mockk: exported
+  - $libs.mockk.bdd: exported
+  - $libs.slf4j.simple: exported
+  - $libs.testcontainers.junit5: exported
+  - $libs.testcontainers.postgresql: exported
+
