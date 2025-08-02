@@ -9,10 +9,23 @@
 ## Usage
 
 ```bash
+# Update the amper
 $ ./amper update --dev
+
+# Build the app and create an executable jar
 $ ./amper build [-v release]
 $ ./amper package
+
+# Run the tests
 $ ./amper test
+
+# Run the app
+$ ./amper run --jvm-args=--enable-preview -m jvm
+$ ./amper run -m macos --platform macosArm64
+
+# Publish to mavenLocal
 $ ./amper publish mavenLocal
+
+# List all the binaries
 $  find . \( -path "*/build/*" -type f -perm +111 -o -path "*/build/tasks/*executableJar*/*.jar" \) | grep -v -E "(test|debug|dSYM)" | xargs du -h | sort -hr
 ```

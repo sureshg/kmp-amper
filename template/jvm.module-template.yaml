@@ -7,3 +7,9 @@ settings:
     freeCompilerArgs:
       - --enable-preview
       - -Xlint:all
+
+test-settings:
+  jvm:
+    test:
+      freeJvmArgs:
+        - --enable-preview
