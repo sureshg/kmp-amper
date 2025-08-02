@@ -37,10 +37,6 @@ settings:
       version: 1.9.0
       format: json
 
-  ktor:
-    enabled: true
-    version: 3.2.3
-
   publishing:
     group: dev.suresh.amper
     version: 1.0-SNAPSHOT
