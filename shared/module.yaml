@@ -29,12 +29,15 @@ dependencies:
   - $libs.ktor.client.serialization: exported
   - $libs.ktor.client.websockets: exported
   - $libs.ktor.serialization.json: exported
+  - $libs.ajalt.clikt: exported
+  - $libs.ajalt.clikt.markdown: exported
 
 dependencies@jvm:
-  - $libs.ktor.client.java: exported
   - $libs.slf4j.api: exported
   - $libs.kotlinx.coroutines.slf4j: exported
   - $libs.jspecify: exported
+  - $libs.ktor.client.java: exported
+  - $libs.sslcontext.kickstart: exported
 
 dependencies@native:
   - $libs.ktor.client.curl: exported
