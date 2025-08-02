@@ -5,9 +5,9 @@ apply:
   - ../template/common.module-template.yaml
   - ../template/jvm.module-template.yaml
 
-dependencies:
-  - ../shared
-
 settings:
   jvm:
     mainClass: MainKt
+
+dependencies:
+  - ../shared
