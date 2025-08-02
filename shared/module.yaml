@@ -2,72 +2,9 @@ product:
   type: lib
   platforms: [ jvm, linuxArm64, linuxX64, macosX64, macosArm64, mingwX64 ]
 
-settings:
-  jvm:
-    release: 21
-    storeParameterNames: true
-  java:
-    freeCompilerArgs:
-      - --enable-preview
-      - -Xlint:all
-  kotlin:
-    languageVersion: 2.2
-    progressiveMode: true
-    allWarningsAsErrors: true
-    suppressWarnings: false
-    verbose: false
-    freeCompilerArgs:
-      - -Xcontext-parameters
-      - -Xexpect-actual-classes
-      - -Xskip-prerelease-check
-      - -Xwhen-guards
-      - -Xmulti-dollar-interpolation
-      - -Xnon-local-break-continue
-      - -Xnested-type-aliases
-      - -Xreport-all-warnings
-      - -Xreturn-value-checker=check
-    optIns:
-      - kotlin.ExperimentalStdlibApi
-      - kotlin.ExperimentalUnsignedTypes
-      - kotlin.contracts.ExperimentalContracts
-      - kotlin.io.encoding.ExperimentalEncodingApi
-      - kotlin.time.ExperimentalTime
-      - kotlinx.coroutines.ExperimentalCoroutinesApi
-      - kotlinx.serialization.ExperimentalSerializationApi
-      - kotlin.ExperimentalMultiplatform
-      - kotlin.js.ExperimentalJsExport
-      - kotlin.uuid.ExperimentalUuidApi
-      - kotlin.concurrent.atomics.ExperimentalAtomicApi
-    serialization:
-      version: 1.9.0
-      format: json
-  ktor:
-    version: 3.2.3
-
-settings@jvm:
-  kotlin:
-    freeCompilerArgs:
-      - -Xjdk-release=21
-      - -Xjvm-enable-preview
-      - -Xadd-modules=ALL-MODULE-PATH
-      - -Xjsr305=strict
-      - -Xjvm-default=all
-      - -Xassertions=jvm
-      - -Xemit-jvm-type-annotations
-      - -Xjspecify-annotations=strict
-      - -Xno-param-assertions
-      - -Xno-call-assertions
-      - -Xno-receiver-assertions
-      # - -Xmodule-path=
-      # - -Xjavac-arguments="--add-exports java.base/sun.nio.ch=ALL-UNNAMED"
-      # - -Xexplicit-api=strict  # strict|warning|disable
-      # - -Xgenerate-strict-metadata-version
-
-settings@native:
-  kotlin:
-    optIns:
-      - kotlinx.cinterop.ExperimentalForeignApi
-      - kotlin.experimental.ExperimentalNativeApi
+apply:
+  - ../template/common.module-template.yaml
+  - ../template/jvm.module-template.yaml
 
 dependencies:
   - bom: $libs.kotlin.bom
@@ -102,13 +39,6 @@ dependencies@jvm:
 dependencies@native:
   - $libs.ktor.client.curl: exported
 
-test-settings:
-  junit: junit-5
-  kotlin:
-    powerAssert:
-      enabled: true
-      functions: [ kotlin.assert, kotlin.test.assertTrue, kotlin.test.assertEquals, kotlin.test.assertNull, kotlin.require ]
-
 test-dependencies:
   - $libs.kotlin.test: exported
   - $libs.kotlinx.coroutines.test: exported
@@ -123,7 +53,3 @@ test-dependencies@jvm:
   - $libs.slf4j.simple: exported
   - $libs.testcontainers.junit5: exported
   - $libs.testcontainers.postgresql: exported
-
-apply:
-  - ../template/repo.module-template.yaml
-

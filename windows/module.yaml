@@ -2,5 +2,8 @@ product:
   type: windows/app
   platforms: [ mingwX64 ]
 
+apply:
+  - ../template/common.module-template.yaml
+
 dependencies:
   - ../shared

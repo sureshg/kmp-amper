@@ -1,0 +1,82 @@
+repositories:
+  - id: mavenLocal
+    url: mavenLocal
+    resolve: false
+    publish: true
+
+settings:
+  kotlin:
+    languageVersion: 2.2
+    progressiveMode: true
+    allWarningsAsErrors: true
+    suppressWarnings: false
+    verbose: false
+    freeCompilerArgs:
+      - -Xcontext-parameters
+      - -Xexpect-actual-classes
+      - -Xskip-prerelease-check
+      - -Xwhen-guards
+      - -Xmulti-dollar-interpolation
+      - -Xnon-local-break-continue
+      - -Xnested-type-aliases
+      - -Xreport-all-warnings
+      - -Xreturn-value-checker=check
+    optIns:
+      - kotlin.ExperimentalStdlibApi
+      - kotlin.ExperimentalUnsignedTypes
+      - kotlin.contracts.ExperimentalContracts
+      - kotlin.io.encoding.ExperimentalEncodingApi
+      - kotlin.time.ExperimentalTime
+      - kotlinx.coroutines.ExperimentalCoroutinesApi
+      - kotlinx.serialization.ExperimentalSerializationApi
+      - kotlin.ExperimentalMultiplatform
+      - kotlin.js.ExperimentalJsExport
+      - kotlin.uuid.ExperimentalUuidApi
+      - kotlin.concurrent.atomics.ExperimentalAtomicApi
+    serialization:
+      version: 1.9.0
+      format: json
+
+  ktor:
+    enabled: true
+    version: 3.2.3
+
+  publishing:
+    group: dev.suresh.amper
+    version: 1.0-SNAPSHOT
+
+settings@jvm:
+  kotlin:
+    freeCompilerArgs:
+      - -Xjdk-release=21
+      - -Xjvm-enable-preview
+      - -Xadd-modules=ALL-MODULE-PATH
+      - -Xjsr305=strict
+      - -Xjvm-default=all
+      - -Xassertions=jvm
+      - -Xemit-jvm-type-annotations
+      - -Xjspecify-annotations=strict
+      - -Xno-param-assertions
+      - -Xno-call-assertions
+      - -Xno-receiver-assertions
+      # - -Xmodule-path=
+      # - -Xjavac-arguments="--add-exports java.base/sun.nio.ch=ALL-UNNAMED"
+      # - -Xexplicit-api=strict  # strict|warning|disable
+      # - -Xgenerate-strict-metadata-version
+
+settings@native:
+  kotlin:
+    optIns:
+      - kotlinx.cinterop.ExperimentalForeignApi
+      - kotlin.experimental.ExperimentalNativeApi
+
+test-settings:
+  kotlin:
+    powerAssert:
+      enabled: true
+      functions:
+        - kotlin.assert
+        - kotlin.require
+        - kotlin.test.assertTrue
+        - kotlin.test.assertEquals
+        - kotlin.test.assertNull

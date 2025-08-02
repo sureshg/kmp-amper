@@ -1,0 +1,9 @@
+settings:
+  jvm:
+    release: 21
+    storeParameterNames: true
+
+  java:
+    freeCompilerArgs:
+      - --enable-preview
+      - -Xlint:all

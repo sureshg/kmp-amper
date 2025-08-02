@@ -1,6 +1,10 @@
 product:
   type: jvm/app
 
+apply:
+  - ../template/common.module-template.yaml
+  - ../template/jvm.module-template.yaml
+
 dependencies:
   - ../shared
 
