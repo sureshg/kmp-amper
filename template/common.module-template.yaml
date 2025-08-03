@@ -46,7 +46,6 @@ settings@jvm:
     freeCompilerArgs:
       - -Xjdk-release=21
       - -Xjvm-enable-preview
-      - -Xadd-modules=ALL-MODULE-PATH
       - -Xjsr305=strict
       - -Xjvm-default=all
       - -Xassertions=jvm
@@ -55,6 +54,7 @@ settings@jvm:
       - -Xno-param-assertions
       - -Xno-call-assertions
       - -Xno-receiver-assertions
+      # - -Xadd-modules=ALL-MODULE-PATH
       # - -Xmodule-path=
       # - -Xjavac-arguments="--add-exports java.base/sun.nio.ch=ALL-UNNAMED"
       # - -Xexplicit-api=strict  # strict|warning|disable

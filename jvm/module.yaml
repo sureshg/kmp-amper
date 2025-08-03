@@ -11,3 +11,4 @@ settings:
 
 dependencies:
   - ../shared
+  - $libs.slf4j.simple

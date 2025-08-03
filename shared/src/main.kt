@@ -1,15 +1,11 @@
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
+import dev.suresh.*
+import kotlinx.coroutines.*
 
-@Serializable data class Person(val name: String, val age: Int)
-
-fun main() {
-  println("Hello Kotlin ${KotlinVersion.CURRENT} - ${World().get()}")
-  val s =
-      Json.decodeFromString<Person>(
-          """
-                {"name": "John", "age": 30}
-              """
-              .trimIndent())
-  println(s)
+fun main() = runBlocking {
+  println("Kotlin ${KotlinVersion.CURRENT} - ${Platform().name()}")
+  val client = MediaApiClient()
+  val images = client.images()
+  println("Images: ${images.size}")
+  val videos = client.videos()
+  println("Videos: ${videos.size}")
 }
