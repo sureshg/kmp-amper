@@ -21,6 +21,7 @@ settings:
       - -Xnested-type-aliases
       - -Xreport-all-warnings
       - -Xreturn-value-checker=check
+      - -Xcontext-sensitive-resolution
     optIns:
       - kotlin.ExperimentalStdlibApi
       - kotlin.ExperimentalUnsignedTypes
@@ -65,6 +66,15 @@ settings@native:
     optIns:
       - kotlinx.cinterop.ExperimentalForeignApi
       - kotlin.experimental.ExperimentalNativeApi
+
+settings@linux:
+  kotlin:
+    linkerOpts: [
+      "-Wl,--as-needed",
+      "-Wl,-Bstatic",
+      "-lz",
+      "-Wl,-Bdynamic"
+    ]
 
 test-settings:
   kotlin:

@@ -14,7 +14,6 @@ import io.ktor.client.plugins.websocket.pingInterval
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.util.*
-import kotlinx.serialization.json.ClassDiscriminatorMode.POLYMORPHIC
 import kotlinx.serialization.json.Json
 
 /** Common JSON instance for serde of JSON data. */
@@ -44,8 +43,8 @@ typealias HttpClientConfigurer = HttpClientConfig<*>.() -> Unit
  */
 expect fun httpClient(
     name: String = "Api Client",
-    timeout: Timeout = Timeout.DEFAULT,
-    retry: Retry = Retry.DEFAULT,
+    timeout: Timeout = DEFAULT,
+    retry: Retry = DEFAULT,
     httpLogger: KLogger,
     config: HttpClientConfigurer = defaultHttpClientConfig(name, timeout, retry, httpLogger)
 ): HttpClient
@@ -82,9 +81,9 @@ fun defaultHttpClientConfig(
   install(Logging) {
     level =
         when {
-          httpLogger.isDebugEnabled() -> LogLevel.ALL
-          httpLogger.isLoggingOff() -> LogLevel.NONE
-          else -> LogLevel.INFO
+          httpLogger.isDebugEnabled() -> ALL
+          httpLogger.isLoggingOff() -> NONE
+          else -> INFO
         }
 
     logger =
@@ -93,7 +92,7 @@ fun defaultHttpClientConfig(
             httpLogger.info { message }
           }
         }
-    format = LoggingFormat.OkHttp
+    format = OkHttp
     sanitizeHeader { header -> header == HttpHeaders.Authorization }
     // filter { it.url.host.contains("localhost").not() }
   }
