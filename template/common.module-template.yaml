@@ -69,7 +69,7 @@ settings@native:
 
 settings@linux:
   kotlin:
-    linkerOpts: [
+    linkerOptions: [
       "-Wl,--as-needed",
       "-Wl,-Bstatic",
       "-lz",
