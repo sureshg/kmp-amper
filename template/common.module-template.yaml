@@ -34,9 +34,16 @@ settings:
       - kotlin.js.ExperimentalJsExport
       - kotlin.uuid.ExperimentalUuidApi
       - kotlin.concurrent.atomics.ExperimentalAtomicApi
+
     serialization:
       version: 1.9.0
       format: json
+
+    ksp:
+      version: 2.2.20-RC-2.0.2
+      processors:
+        - $libs.ksp.auto.service
+      processorOptions:
 
   publishing:
     group: dev.suresh.amper

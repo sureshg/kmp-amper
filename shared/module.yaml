@@ -38,6 +38,7 @@ dependencies@jvm:
   - $libs.jspecify: exported
   - $libs.ktor.client.java: exported
   - $libs.sslcontext.kickstart: exported
+  - $libs.google.auto.annotations: exported
 
 dependencies@native:
   - $libs.ktor.client.curl: exported

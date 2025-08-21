@@ -7,6 +7,11 @@ settings:
     freeCompilerArgs:
       - --enable-preview
       - -Xlint:all
+    # annotationProcessing:
+    #   processors:
+    #     - $libs.google.auto.service
+    #   processorOptions:
+    #     - debug: "true"
 
 test-settings:
   jvm:
