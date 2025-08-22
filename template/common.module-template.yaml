@@ -12,6 +12,7 @@ settings:
     suppressWarnings: false
     verbose: false
     freeCompilerArgs:
+      - -Wextra
       - -Xcontext-parameters
       - -Xexpect-actual-classes
       - -Xskip-prerelease-check
