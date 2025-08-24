@@ -23,6 +23,7 @@ settings:
       - -Xreport-all-warnings
       - -Xreturn-value-checker=check
       - -Xcontext-sensitive-resolution
+    # - -Xsuppress-warning=CAN_BE_VAL
     optIns:
       - kotlin.ExperimentalStdlibApi
       - kotlin.ExperimentalUnsignedTypes
@@ -48,18 +49,13 @@ settings:
 
   publishing:
     group: dev.suresh.amper
-    version: 1.0-SNAPSHOT
+    version: 1.0.0-SNAPSHOT
 
 settings@jvm:
   kotlin:
     freeCompilerArgs:
       - -Xjdk-release=21
       - -Xjvm-enable-preview
-      - -Xjsr305=strict
-      - -Xjvm-default=all
-      - -Xassertions=jvm
-      - -Xemit-jvm-type-annotations
-      - -Xjspecify-annotations=strict
       - -Xno-param-assertions
       - -Xno-call-assertions
       - -Xno-receiver-assertions
@@ -67,8 +63,7 @@ settings@jvm:
       # - -Xadd-modules=ALL-MODULE-PATH
       # - -Xmodule-path=
       # - -Xjavac-arguments="--add-exports java.base/sun.nio.ch=ALL-UNNAMED"
-      # - -Xexplicit-api=strict  # strict|warning|disable
-      # - -Xgenerate-strict-metadata-version
+      # - -Xexplicit-api=strict
 
 settings@native:
   kotlin:
