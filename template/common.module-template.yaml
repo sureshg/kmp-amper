@@ -43,9 +43,6 @@ settings:
 
     ksp:
       version: 2.2.20-RC-2.0.2
-      processors:
-        - $libs.ksp.auto.service
-      processorOptions:
 
   publishing:
     group: dev.suresh.amper
@@ -53,6 +50,7 @@ settings:
 
 settings@jvm:
   kotlin:
+
     freeCompilerArgs:
       - -Xjdk-release=21
       - -Xjvm-enable-preview
@@ -64,6 +62,11 @@ settings@jvm:
       # - -Xmodule-path=
       # - -Xjavac-arguments="--add-exports java.base/sun.nio.ch=ALL-UNNAMED"
       # - -Xexplicit-api=strict
+
+    ksp:
+      processors:
+        - $libs.ksp.auto.service
+      processorOptions:
 
 settings@native:
   kotlin:
