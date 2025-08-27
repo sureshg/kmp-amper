@@ -45,6 +45,7 @@ settings:
       version: 2.2.20-RC-2.0.2
 
   publishing:
+    enabled: true
     group: dev.suresh.amper
     version: 1.0.0-SNAPSHOT
 
