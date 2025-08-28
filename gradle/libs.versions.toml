@@ -46,8 +46,8 @@ kotlinx-dataframe              = "1.0.0-Beta2"
 kotlinx-kandy                  = "0.8.1-local-5-dev-74"
 kotlin-statistics              = "0.4.0-RC1"
 gradle-kotlin-dsl              = "6.2.0"
-exoquery-plugin                = "2.2.0-1.5.0.PL"
-exoquery-sql                   = "1.5.0.PL"
+exoquery-plugin                = "2.2.0-1.5.1.PL"
+exoquery-sql                   = "1.5.1.PL"
 exposed                        = "1.0.0-beta-5"
 postgresql                     = "42.7.7"
 embedded-postgres              = "2.1.1"
@@ -77,6 +77,7 @@ otel-kotlin                    = "0.4.0"
 okio                           = "3.16.0"
 sslcontext-kickstart           = "9.1.0"
 ksp-auto-service               = "1.2.0"
+sweetspi                       = "0.1.3"
 zip-prefixer                   = "0.3.1"
 ajalt-mordant                  = "3.0.2"
 ajalt-clikt                    = "5.0.3"
@@ -169,7 +170,7 @@ async-profiler                 = "4.1"
 ap-loader-all                  = "4.1-10"
 openjdk-jmc                    = "9.1.0"
 airlift-aircompressor          = "2.0.2"
-airlift-security               = "351"
+airlift-security               = "352"
 directory-keystore             = "1.1.1"
 maven-mima                     = "3.0.0-alpha-3"
 maven-archeologist             = "0.0.10"
@@ -184,12 +185,12 @@ cel                            = "0.10.1"
 kfswatch                       = "1.3.1"
 kmp-process                    = "0.3.2"
 kmbed                          = "1.8.4"
-langchain4j                    = "1.3.0"
-langchain4j-jlama              = "1.3.0-beta9"
+langchain4j                    = "1.4.0"
+langchain4j-jlama              = "1.4.0-beta10"
 langchain4j-kotlin             = "0.3.0"
 jlama                          = "0.8.4"
 mcp-kotlin                     = "0.6.0"
-koog                           = "0.4.0"
+koog                           = "0.4.1"
 mcp4k                          = "0.4.4"
 dflib                          = "2.0.0-M3"
 ldaptive                       = "2.4.2"
@@ -204,8 +205,8 @@ bluesky-ozone                  = "0.3.3"
 
 # Compose
 jetbrains-compose              = "1.9.0-rc01"
-jetbrains-compose-viewmodel    = "2.9.2"
-jetbrains-compose-nav          = "2.9.0-beta05"
+jetbrains-compose-viewmodel    = "2.9.3"
+jetbrains-compose-nav          = "2.9.0-rc01"
 jetbrains-compose-adaptive     = "1.2.0-alpha05"
 jetbrains-compose-icons        = "1.7.3"
 kobweb                         = "0.23.1"
@@ -520,6 +521,8 @@ google-auto-service-apt              = { module = "com.google.auto.service:auto-
 google-auto-annotations              = { module = "com.google.auto.service:auto-service-annotations"           , version.ref = "google-auto-service"}
 google-tink                          = { module = "com.google.crypto.tink:tink"                                , version.ref = "google-tink"}
 ksp-auto-service                     = { module = "dev.zacsweers.autoservice:auto-service-ksp"                 , version.ref = "ksp-auto-service"}
+sweetspi-runtime                     = { module = "dev.whyoleg.sweetspi:sweetspi-runtime"                      , version.ref = "sweetspi"}
+sweetspi-processor                   = { module = "dev.whyoleg.sweetspi:sweetspi-processor"                    , version.ref = "sweetspi"}
 koin-bom                             = { module = "io.insert-koin:koin-bom"                                    , version.ref = "koin"}
 koin-core                            = { module = "io.insert-koin:koin-core"                                   , version.ref = "koin"}
 koin-core-coroutines                 = { module = "io.insert-koin:koin-core-coroutines"                        , version.ref = "koin"}
@@ -672,6 +675,7 @@ jlama-native                         = { module = "com.github.tjake:jlama-native
 dflib                                = { module = "org.dflib:dflib"                                                         , version.ref = "dflib" }
 mcp-kotlin                           = { module = "io.modelcontextprotocol:kotlin-sdk"                                      , version.ref = "mcp-kotlin"}
 koog-agents                          = { module = "ai.koog:koog-agents"                                                     , version.ref = "koog"}
+koog-ktor                            = { module = "ai.koog:koog-ktor"                                                       , version.ref = "koog"}
 
 # Social
 ozone-bluesky                        = { module = "sh.christian.ozone:bluesky"                                              , version.ref = "bluesky-ozone"}
