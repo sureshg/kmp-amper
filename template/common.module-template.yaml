@@ -6,9 +6,10 @@ repositories:
 
 settings:
   kotlin:
-    languageVersion: 2.2
+    languageVersion: 2.3
+    apiVersion: 2.3
     progressiveMode: true
-    allWarningsAsErrors: true
+    allWarningsAsErrors: false
     suppressWarnings: false
     verbose: false
     freeCompilerArgs:
@@ -51,14 +52,13 @@ settings:
 
 settings@jvm:
   kotlin:
-
     freeCompilerArgs:
-      - -Xjdk-release=21
       - -Xjvm-enable-preview
       - -Xno-param-assertions
       - -Xno-call-assertions
       - -Xno-receiver-assertions
       - -Xwhen-expressions=indy
+      # - -Xjdk-release=21
       # - -Xadd-modules=ALL-MODULE-PATH
       # - -Xmodule-path=
       # - -Xjavac-arguments="--add-exports java.base/sun.nio.ch=ALL-UNNAMED"
@@ -71,6 +71,7 @@ settings@jvm:
 
 settings@native:
   kotlin:
+    debug: false
     optIns:
       - kotlinx.cinterop.ExperimentalForeignApi
       - kotlin.experimental.ExperimentalNativeApi
