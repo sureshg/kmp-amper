@@ -21,6 +21,10 @@ $ ./amper test
 $ ./amper run --jvm-args=--enable-preview -m jvm
 $ ./amper run -m macos --platform macosArm64
 
+# Check version updates in amper version catalog
+$ brew install deezer/repo/caupain
+$ caupain
+
 # Publish to mavenLocal
 $ ./amper publish mavenLocal
 

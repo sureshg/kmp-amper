@@ -37,7 +37,7 @@ dependencies@jvm:
   - $libs.kotlinx.coroutines.slf4j: exported
   - $libs.jspecify: exported
   - $libs.ktor.client.java: exported
-  - $libs.sslcontext.kickstart: exported
+  - $libs.ayza: exported
   - $libs.google.auto.annotations: exported
 
 dependencies@native:
