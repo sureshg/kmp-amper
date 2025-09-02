@@ -6,6 +6,7 @@ repositories:
 
 settings:
   kotlin:
+    version: 2.2.20-RC2
     languageVersion: 2.3
     apiVersion: 2.3
     progressiveMode: true
