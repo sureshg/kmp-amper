@@ -4,7 +4,6 @@ product:
 
 apply:
   - ../template/common.module-template.yaml
-  - ../template/jvm.module-template.yaml
 
 dependencies:
   - bom: $libs.kotlin.bom
@@ -51,7 +50,6 @@ test-dependencies:
 test-dependencies@jvm:
   - bom: $libs.junit.bom
   - bom: $libs.testcontainers.bom
-  - $libs.kotlin.test.junit5: exported
   - $libs.mockk: exported
   - $libs.mockk.bdd: exported
   - $libs.slf4j.simple: exported

@@ -3,7 +3,6 @@ product:
 
 apply:
   - ../template/common.module-template.yaml
-  - ../template/jvm.module-template.yaml
 
 settings:
   jvm:

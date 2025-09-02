@@ -5,6 +5,10 @@ repositories:
     publish: true
 
 settings:
+  jvm:
+    release: 21
+    storeParameterNames: true
+
   kotlin:
     version: 2.2.20-RC2
     languageVersion: 2.3
@@ -52,6 +56,16 @@ settings:
     version: 1.0.0-SNAPSHOT
 
 settings@jvm:
+  java:
+    freeCompilerArgs:
+      - --enable-preview
+      - -Xlint:all
+    # annotationProcessing:
+    #   processors:
+    #     - $libs.google.auto.service
+    #   processorOptions:
+    #     - debug: "true"
+
   kotlin:
     freeCompilerArgs:
       - -Xjvm-enable-preview
@@ -68,7 +82,8 @@ settings@jvm:
     ksp:
       processors:
         - $libs.ksp.auto.service
-      processorOptions:
+
+  junit: junit-5
 
 settings@native:
   kotlin:
@@ -96,3 +111,9 @@ test-settings:
         - kotlin.test.assertTrue
         - kotlin.test.assertEquals
         - kotlin.test.assertNull
+
+test-settings@jvm:
+  jvm:
+    test:
+      freeJvmArgs:
+        - --enable-preview
