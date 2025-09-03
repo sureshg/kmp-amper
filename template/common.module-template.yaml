@@ -73,6 +73,7 @@ settings@jvm:
       - -Xno-call-assertions
       - -Xno-receiver-assertions
       - -Xwhen-expressions=indy
+      # - -Xjvm-expose-boxed
       # - -Xjdk-release=21
       # - -Xadd-modules=ALL-MODULE-PATH
       # - -Xmodule-path=
