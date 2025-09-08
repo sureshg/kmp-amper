@@ -1,10 +1,10 @@
 modules:
   - shared
   - jvm
-  - linux
-  - macos
-  - windows
-# - misc/js
-# - misc/wasm
-# - misc/wasi
+  - native/linux
+  - native/macos
+  - native/windows
+# - web/js
+# - web/wasm
+# - web/wasi
 # - "*-cli"
