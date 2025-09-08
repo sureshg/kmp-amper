@@ -1,0 +1,7 @@
+- uses: actions/cache@v4
+  with:
+    path: |
+      ~/.cache/JetBrains/Amper
+    key: ${{ runner.os }}-amper-${{ hashFiles('project.yaml', '**/module.yaml', 'amper', 'amper.bat', 'libs.versions.toml') }}
+    restore-keys: |
+      ${{ runner.os }}-amper-
