@@ -9,6 +9,7 @@ development experience with modern Kotlin tooling.
 ```bash
 # Update the amper
 $ ./amper update --dev
+$ ./amper update --target-version 0.8.0-dev-3191
 
 # Build the app and create an executable jar
 $ ./amper build [-v release]
@@ -31,6 +32,10 @@ $ ./amper publish mavenLocal
 # List all the binaries
 $  find . \( -path "*/build/*" -type f -perm +111 -o -path "*/build/tasks/*executableJar*/*.jar" \) | grep -v -E "(test|debug|dSYM)" | xargs du -h | sort -hr
 ```
+
+> [!TIP]
+> You can find all the Amper CLI dev
+> versions [here](https://packages.jetbrains.team/maven/p/amper/amper/org/jetbrains/amper/amper-cli/)
 
 ### Amper Config Settings
 

@@ -1,6 +1,6 @@
 product:
   type: lib
-  platforms: [ jvm, linuxArm64, linuxX64, macosX64, macosArm64, mingwX64 ]
+  platforms: [ jvm, linuxArm64, linuxX64, macosX64, macosArm64, mingwX64, js, wasmJs ]
 
 apply:
   - ../template/common.module-template.yaml
@@ -41,6 +41,10 @@ dependencies@jvm:
 
 dependencies@native:
   - $libs.ktor.client.curl: exported
+
+dependencies@web:
+  - $libs.ktor.client.js: exported
+  - $libs.kotlinx.browser: exported
 
 test-dependencies:
   - $libs.kotlin.test: exported

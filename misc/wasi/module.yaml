@@ -1,0 +1,8 @@
+product:
+  type: wasm-wasi/app
+
+apply:
+  - ../../template/common.module-template.yaml
+
+dependencies:
+  - ../../shared

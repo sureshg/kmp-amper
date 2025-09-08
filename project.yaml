@@ -4,4 +4,7 @@ modules:
   - linux
   - macos
   - windows
+# - misc/js
+# - misc/wasm
+# - misc/wasi
 # - "*-cli"

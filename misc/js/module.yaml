@@ -1,0 +1,8 @@
+product:
+  type: js/app
+
+apply:
+  - ../../template/common.module-template.yaml
+
+dependencies:
+  - ../../shared
