@@ -103,6 +103,12 @@ settings@linux:
       "-Wl,-Bdynamic"
     ]
 
+settings@web:
+  kotlin:
+    freeCompilerArgs:
+      - -Xes-long-as-bigint
+      # - -Xir-per-file
+
 test-settings:
   kotlin:
     powerAssert:
