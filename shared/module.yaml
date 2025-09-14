@@ -3,7 +3,7 @@ product:
   platforms: [ jvm, linuxArm64, linuxX64, macosX64, macosArm64, mingwX64, js, wasmJs ]
 
 apply:
-  - ../template/common.module-template.yaml
+  - common.module-template.yaml
 
 dependencies:
   - bom: $libs.kotlin.bom
