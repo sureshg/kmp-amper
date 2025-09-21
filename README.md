@@ -9,7 +9,6 @@ development experience with modern Kotlin tooling.
 ```bash
 # Update the amper
 $ ./amper update --dev
-$ ./amper update --target-version 0.8.0-dev-3191
 
 # Build the app and create an executable jar
 $ ./amper build [-v release]
