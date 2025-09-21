@@ -24,7 +24,7 @@ $ ./amper run -m macos --platform macosArm64
 
 # Check version updates in amper version catalog
 $ brew install deezer/repo/caupain
-$ caupain
+$ caupain -i libs.versions.toml
 
 # Publish to mavenLocal
 $ ./amper publish mavenLocal
