@@ -40,7 +40,6 @@ settings:
       - kotlinx.coroutines.ExperimentalCoroutinesApi
       - kotlinx.serialization.ExperimentalSerializationApi
       - kotlin.ExperimentalMultiplatform
-      - kotlin.js.ExperimentalJsExport
       - kotlin.uuid.ExperimentalUuidApi
       - kotlin.concurrent.atomics.ExperimentalAtomicApi
 
@@ -108,6 +107,9 @@ settings@web:
     freeCompilerArgs:
       - -Xes-long-as-bigint
       # - -Xir-per-file
+    optIns:
+      - kotlin.js.ExperimentalJsExport
+      - kotlin.js.ExperimentalWasmJsInterop
 
 test-settings:
   kotlin:
