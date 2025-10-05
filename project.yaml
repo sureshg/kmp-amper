@@ -6,5 +6,6 @@ modules:
   - native/windows
   - web/js
   - web/wasm
+  - compose
 # - web/wasi
 # - "*-cli"
