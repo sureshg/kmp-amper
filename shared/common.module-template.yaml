@@ -58,8 +58,8 @@ settings:
 settings@jvm:
   java:
     freeCompilerArgs:
-      - --enable-preview
       - -Xlint:all
+    # - --enable-preview
     # annotationProcessing:
     #   processors:
     #     - $libs.google.auto.service
@@ -68,11 +68,11 @@ settings@jvm:
 
   kotlin:
     freeCompilerArgs:
-      - -Xjvm-enable-preview
       - -Xno-param-assertions
       - -Xno-call-assertions
       - -Xno-receiver-assertions
       - -Xwhen-expressions=indy
+      # - -Xjvm-enable-preview
       # - -Xjvm-expose-boxed
       # - -Xjdk-release=21
       # - -Xadd-modules=ALL-MODULE-PATH
@@ -126,4 +126,4 @@ test-settings@jvm:
   jvm:
     test:
       freeJvmArgs:
-        - --enable-preview
+      # - --enable-preview
