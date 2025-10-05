@@ -21,6 +21,9 @@ $ ./amper test
 $ ./amper run --jvm-args=--enable-preview -m jvm
 $ ./amper run -m macos --platform macosArm64
 
+# Dependency insights
+$ ./amper show dependencies -m jvm --scope=runtime --filter=org.jetbrains.kotlin:kotlin-stdlib
+
 # Check version updates in amper version catalog
 $ brew install deezer/repo/caupain
 $ caupain -i libs.versions.toml
