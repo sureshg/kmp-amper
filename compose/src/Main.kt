@@ -8,10 +8,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.singleWindowApplication
-import org.jetbrains.compose.reload.DevelopmentEntryPoint
 
 @Composable
-@DevelopmentEntryPoint
 fun App() {
   var count by remember { mutableStateOf(0) }
   MaterialTheme {

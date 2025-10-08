@@ -9,8 +9,6 @@ settings:
     mainClass: MainKt
   compose:
     enabled: true
-    experimental:
-      hotReload: enabled
 
 dependencies:
   - ../shared
