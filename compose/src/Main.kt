@@ -24,6 +24,8 @@ fun App() {
       )
     }
   }
+
+  SideEffect { println("Side Effect") }
 }
 
 fun main() = singleWindowApplication(title = "Compose Desktop App") { App() }
