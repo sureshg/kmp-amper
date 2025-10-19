@@ -105,8 +105,13 @@ settings@linux:
 settings@web:
   kotlin:
     freeCompilerArgs:
+      - -target=es2015
+      - -source-map
+      - -Xir-dce=true
+      - -Xgenerate-dts
       - -Xes-long-as-bigint
-      # - -Xir-per-file
+      - -Xir-per-file
+      # - -Xir-per-module
     optIns:
       - kotlin.js.ExperimentalJsExport
       - kotlin.js.ExperimentalWasmJsInterop
