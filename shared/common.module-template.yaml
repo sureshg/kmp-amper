@@ -127,8 +127,8 @@ test-settings:
         - kotlin.test.assertEquals
         - kotlin.test.assertNull
 
-test-settings@jvm:
-  jvm:
-    test:
-      freeJvmArgs:
-      # - --enable-preview
+#test-settings@jvm:
+#  jvm:
+#    test:
+#      freeJvmArgs:
+#        - --enable-preview
