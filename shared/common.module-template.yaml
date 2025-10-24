@@ -48,7 +48,7 @@ settings:
       format: json
 
     ksp:
-      version: 2.2.21-RC2-2.0.4
+      version: 2.3.0
 
   publishing:
     enabled: true
