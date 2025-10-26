@@ -21,6 +21,9 @@ $ ./amper test
 $ ./amper run --jvm-args=--enable-preview -m jvm
 $ ./amper run -m macos --platform macosArm64
 
+# JDK Incubator modules
+$ ./amper run -m jvm --jvm-args="--enable-preview --add-modules=jdk.incubator.vector" --main-class=VectorKt
+
 # Dependency insights
 $ ./amper show dependencies -m jvm --scope=runtime --filter=org.jetbrains.kotlin:kotlin-stdlib
 
