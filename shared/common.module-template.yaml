@@ -10,7 +10,7 @@ settings:
     storeParameterNames: true
 
   kotlin:
-    version: 2.3.0-Beta1
+    version: 2.3.0-Beta2
     languageVersion: 2.3
     apiVersion: 2.3
     progressiveMode: true
@@ -21,7 +21,6 @@ settings:
       - -Wextra
       - -Xcontext-parameters
       - -Xexpect-actual-classes
-      - -Xskip-prerelease-check
       - -Xwhen-guards
       - -Xmulti-dollar-interpolation
       - -Xnon-local-break-continue
@@ -30,6 +29,9 @@ settings:
       - -Xreturn-value-checker=check
       - -Xcontext-sensitive-resolution
       - -Xannotation-default-target=param-property
+      - -Xdata-flow-based-exhaustiveness
+    # - -Xannotation-target-all
+    # - -Xskip-prerelease-check
     # - -Xsuppress-warning=CAN_BE_VAL
     optIns:
       - kotlin.ExperimentalStdlibApi
@@ -112,7 +114,8 @@ settings@web:
       - -Xgenerate-dts
       - -Xes-long-as-bigint
       - -Xir-per-file
-      # - -Xir-per-module
+      - -Xwasm-use-new-exception-proposal
+    # - -Xir-per-module
     optIns:
       - kotlin.js.ExperimentalJsExport
       - kotlin.js.ExperimentalWasmJsInterop
