@@ -8,7 +8,10 @@ settings:
   jvm:
     mainClass: MainKt
   compose:
+    version: 1.9.3
     enabled: true
+    resources:
+      enabled: true
 
 dependencies:
   - ../shared
