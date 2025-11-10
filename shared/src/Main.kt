@@ -1,8 +1,7 @@
 import dev.suresh.*
+import kotlinx.coroutines.runBlocking
 
-fun main() {
-  println("Kotlin ${KotlinVersion.CURRENT} - ${Platform().name()}")
-}
+fun main() = runBlocking { mediaClient() }
 
 suspend fun mediaClient() {
   println("Kotlin ${KotlinVersion.CURRENT} - ${Platform().name()}")
