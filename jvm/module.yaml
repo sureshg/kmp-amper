@@ -6,8 +6,12 @@ apply:
 
 settings:
   jvm:
-    mainClass: MainKt
+    mainClass: genai.VoicesKt
 
 dependencies:
   - ../shared
   - $libs.slf4j.simple
+  - $libs.voices.chorus
+  - $libs.voices.alba
+  - $libs.voices.en.us
+  - $libs.onnxruntime

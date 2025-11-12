@@ -115,7 +115,7 @@ mrjar                          = "0.1.1"
 ktfmt                          = "0.59"
 google-javaformat              = "1.32.0"
 palantir-javaformat            = "2.82.0"
-google-auto-value              = "1.11.0"
+google-auto-value              = "1.11.1"
 google-auto-service            = "1.1.1"
 google-tink                    = "1.19.0"
 graalvm                        = "25.0.1"
@@ -712,10 +712,11 @@ koog-executor-openai                 = { module = "ai.koog:prompt-executor-opena
 koog-features-eventhandler           = { module = "ai.koog:agents-features-event-handler"                                   , version.ref = "koog" }
 koog-ktor                            = { module = "ai.koog:koog-ktor"                                                       , version.ref = "koog"}
 voices-chorus                        = { module = "org.pitest.voices:chorus"                                                , version.ref = "voices" }
+voices-alba                          = { module = "org.pitest.voices:alba"                                                  , version.ref = "voices" }
 voices-en-uk                         = { module = "org.pitest.voices:en_uk"                                                 , version.ref = "voices" }
 voices-en-us                         = { module = "org.pitest.voices:en_us"                                                 , version.ref = "voices" }
 voices-model-downloader              = { module = "org.pitest.voices:model-downloader"                                      , version.ref = "voices" }
-voices-alba                          = { module = "org.pitest.voices:alba"                                                  , version.ref = "voices" }
+voices-openvoice-phonemizer          = { module = "org.pitest.voices:openvoice-phonemizer"                                  , version.ref = "voices" }
 onnxruntime                          = { module = "com.microsoft.onnxruntime:onnxruntime"                                   , version.ref = "onnx" }
 onnxruntime-gpu                      = { module = "com.microsoft.onnxruntime:onnxruntime_gpu"                               , version.ref = "onnx" }
 
