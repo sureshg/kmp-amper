@@ -59,6 +59,7 @@ settings:
 
 settings@jvm:
   java:
+    compileIncrementally: true
     freeCompilerArgs:
       - -Xlint:all
       - --add-modules=jdk.incubator.vector
