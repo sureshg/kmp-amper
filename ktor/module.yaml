@@ -1,0 +1,22 @@
+product:
+  type: jvm/app
+
+apply:
+  - ../shared/common.module-template.yaml
+
+settings:
+  ktor:
+    version: 3.3.2
+    enabled: true
+  jvm:
+    mainClass: AppKt
+
+dependencies:
+  - ../shared
+  - $libs.ktor.server.core
+  - $libs.ktor.server.di
+  - $libs.ktor.server.jetty.jakarta
+  - $libs.logback.classic
+
+test-dependencies:
+  - $libs.ktor.server.test.host
