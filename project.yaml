@@ -1,6 +1,7 @@
 modules:
   - shared
   - jvm
+  - ktor
   - native/linux
   - native/macos
   - native/windows
