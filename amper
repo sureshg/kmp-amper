@@ -12,13 +12,14 @@
 #   AMPER_BOOTSTRAP_CACHE_DIR  Cache directory to store extracted JRE and Amper distribution
 #   AMPER_JAVA_HOME            JRE to run Amper itself (optional, does not affect compilation)
 #   AMPER_JAVA_OPTIONS         JVM options to pass to the JVM running Amper (does not affect the user's application)
+#   AMPER_NO_WELCOME_BANNER    Disables the first-run welcome message if set to a non-empty value
 
 set -e -u
 
 # The version of the Amper distribution to provision and use
-amper_version=0.9.0-dev-3431
+amper_version=0.9.0-dev-3435
 # Establish chain of trust from here by specifying exact checksum of Amper distribution to be run
-amper_sha256=08ed6cf681aabc6b4bf59e59842625d3f3d01f7fbb042b2ba07c7d0e028f9860
+amper_sha256=646b574eaa89fc00814b53b72f3aad497dc2f31446b4ebd788ad0a4c49fe4d01
 
 AMPER_DOWNLOAD_ROOT="${AMPER_DOWNLOAD_ROOT:-https://packages.jetbrains.team/maven/p/amper/amper}"
 AMPER_JRE_DOWNLOAD_ROOT="${AMPER_JRE_DOWNLOAD_ROOT:-https:/}"
@@ -82,7 +83,7 @@ download_and_extract() {
     return 0;
   fi
 
-  if [ "$show_banner_on_cache_miss" = "true" ]; then
+  if [ "$show_banner_on_cache_miss" = "true" ] && [ -z "${AMPER_NO_WELCOME_BANNER:-}" ]; then
       echo
       echo '        _____  Welcome to                                  '
       echo '       /:::::|  ____   ___     ____      ____    __  ___   '
