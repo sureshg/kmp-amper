@@ -17,9 +17,9 @@
 setlocal
 
 @rem The version of the Amper distribution to provision and use
-set amper_version=0.9.0-dev-3456
+set amper_version=0.9.0-dev-3467
 @rem Establish chain of trust from here by specifying exact checksum of Amper distribution to be run
-set amper_sha256=f78e314333b0a5c548e39fb356c98f8252732f85c276b9b9c39a21965184cd23
+set amper_sha256=e3000d8affb181ac7f47781ac43c258a1d5e1a88957a054de959f505fea4efa1
 
 if not defined AMPER_DOWNLOAD_ROOT set AMPER_DOWNLOAD_ROOT=https://packages.jetbrains.team/maven/p/amper/amper
 if not defined AMPER_JRE_DOWNLOAD_ROOT set AMPER_JRE_DOWNLOAD_ROOT=https:/
