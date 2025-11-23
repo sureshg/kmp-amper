@@ -59,3 +59,7 @@ test-dependencies@jvm:
   - $libs.slf4j.simple: exported
   - $libs.testcontainers.junit5: exported
   - $libs.testcontainers.postgresql: exported
+
+plugins:
+  build-config:
+    enabled: true

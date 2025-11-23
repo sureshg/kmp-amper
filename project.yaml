@@ -6,7 +6,11 @@ modules:
   - native/macos
   - native/windows
   - compose
+  - plugins/build-config
 # - web/js
 # - web/wasm
 # - web/wasi
 # - "*-cli"
+
+plugins:
+  - ./plugins/build-config
