@@ -12,6 +12,9 @@ settings:
     enabled: true
     resources:
       enabled: true
+    experimental:
+      hotReload:
+        version: 1.0.0
 
 dependencies:
   - ../shared
