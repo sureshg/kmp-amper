@@ -6,7 +6,7 @@ apply:
 
 settings:
   ktor:
-    version: 3.3.2
+    version: 3.3.3
     enabled: true
   jvm:
     mainClass: AppKt
