@@ -20,7 +20,7 @@ fun App() {
     ) {
       Button(onClick = { count++ }) { BasicText(text = "Click me!") }
       BasicText(
-          text = "Click count2: $count",
+          text = "Click count: $count",
       )
     }
   }
