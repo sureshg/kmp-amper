@@ -6,7 +6,7 @@ import org.pitest.voices.ChorusConfig
 import org.pitest.voices.alba.Alba
 import org.pitest.voices.us.EnUsDictionary
 
-fun main() {
+fun voices() {
   val chorusCfg = ChorusConfig(EnUsDictionary.en_us())
   Chorus(chorusCfg).use {
     val voice = it.voice(Alba.albaMedium())
@@ -21,6 +21,6 @@ fun main() {
                 .trimIndent()
         )
     println(audio.toString())
-    audio.save(Path("kotlin.mp3"))
+    audio.save(Path("build/kotlin.mp3"))
   }
 }

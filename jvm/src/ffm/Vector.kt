@@ -5,7 +5,7 @@ import jdk.incubator.vector.*
 val INT_SPECIES = IntVector.SPECIES_PREFERRED
 val FLOAT_SPECIES = FloatVector.SPECIES_PREFERRED
 
-fun main() {
+fun vectorApi() {
   println(INT_SPECIES)
 
   val a = IntArray(22)

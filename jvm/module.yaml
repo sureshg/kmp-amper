@@ -6,7 +6,7 @@ apply:
 
 settings:
   jvm:
-    mainClass: genai.VoicesKt
+    mainClass: AppKt
 
 dependencies:
   - ../shared
