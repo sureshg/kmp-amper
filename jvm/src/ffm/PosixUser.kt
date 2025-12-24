@@ -5,7 +5,7 @@ import java.lang.foreign.*
 import java.lang.foreign.MemoryLayout.PathElement.groupElement
 
 /** Retrieves Unix UID/GID/groups information for the current user. */
-object UnixSystem {
+object PosixUser {
 
   /** Current user's login name, or `null` if unavailable. */
   val username: String?
