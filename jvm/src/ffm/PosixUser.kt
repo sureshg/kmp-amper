@@ -50,7 +50,7 @@ object PosixUser {
 
   init {
     Arena.ofConfined().use { arena ->
-      var groupNum = getGroups?.invokeExact(0, MemorySegment.NULL) as Int
+      var groupNum = getGroups.invokeExact(0, MemorySegment.NULL) as Int
       require(groupNum != -1) { "getgroups returns $groupNum" }
 
       val gs = arena.allocate(C_INT, groupNum.toLong())
@@ -62,13 +62,13 @@ object PosixUser {
       val resBuf = arena.allocate(PASSWD_LAYOUT)
       val pwd = arena.allocate(C_POINTER)
       val pwdBuf = arena.allocate(GETPW_R_SIZE_MAX)
-      val tmpUid = getuid?.invokeExact() as Int
+      val tmpUid = getuid.invokeExact() as Int
 
-      val result = getpwuid_r?.invokeExact(tmpUid, resBuf, pwdBuf, GETPW_R_SIZE_MAX, pwd) as Int
+      val result = getpwuid_r.invokeExact(tmpUid, resBuf, pwdBuf, GETPW_R_SIZE_MAX, pwd) as Int
 
       if (result != 0 || pwd.get(ValueLayout.ADDRESS, 0) == MemorySegment.NULL) {
         uid = tmpUid.toLong()
-        gid = (getgid?.invokeExact() as Int).toLong()
+        gid = (getgid.invokeExact() as Int).toLong()
         username = null
       } else {
         uid = resBuf.get(PW_UID_LAYOUT, PW_UID_OFFSET).toLong()

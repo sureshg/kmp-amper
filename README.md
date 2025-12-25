@@ -22,7 +22,9 @@ $ ./amper run --jvm-args=--enable-preview -m jvm
 $ ./amper run -m macos --platform macosArm64
 
 # JDK Incubator modules
-$ ./amper run -m jvm --jvm-args="--enable-preview --add-modules=jdk.incubator.vector" --main-class=VectorKt
+$ ./amper run -m jvm \
+              --jvm-args="--enable-preview --add-modules=jdk.incubator.vector --enable-native-access=ALL-UNNAMED" \
+              --main-class=AppKt
 
 # Dependency insights
 $ ./amper show dependencies -m jvm --scope=runtime --filter=org.jetbrains.kotlin:kotlin-stdlib
@@ -38,6 +40,19 @@ $ ./amper publish mavenLocal
 $ find . \( -path "*/build/*" -type f -perm +111 -o -path "*/build/*executableJar*/*.jar" \) | grep -v -E "(test|debug|dSYM)" | xargs du -h | sort -hr
 
 $ find . \( -path "*/build/*" -perm +111 -o -path "*/build/tasks/*executableJar*/*.jar" \) -type f -ls | awk '{printf "%.3fM %s\n",$7/1048576,$NF}' | sort -rn
+
+# JVM App
+$ java --enable-preview \
+       --add-modules=jdk.incubator.vector \
+       --enable-native-access=ALL-UNNAMED \
+       -jar build/tasks/_jvm_executableJarJvm/jvm-jvm-executable.jar
+
+# Test Win Binary
+$ docker run --rm --platform="linux/amd64" \
+             -e DISPLAY=host.docker.internal:0 \
+             -v "$PWD":/work \
+             scottyhardy/docker-wine:latest wine /work/build/tasks/_windows_linkMingwX64Release/windows.exe
+
 ```
 
 > [!TIP]
