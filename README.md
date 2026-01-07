@@ -41,18 +41,40 @@ $ find . \( -path "*/build/*" -type f -perm +111 -o -path "*/build/*executableJa
 
 $ find . \( -path "*/build/*" -perm +111 -o -path "*/build/tasks/*executableJar*/*.jar" \) -type f -ls | awk '{printf "%.3fM %s\n",$7/1048576,$NF}' | sort -rn
 
-# JVM App
+```
+
+- Run on JVM
+
+```bash
 $ java --enable-preview \
        --add-modules=jdk.incubator.vector \
        --enable-native-access=ALL-UNNAMED \
        -jar build/tasks/_jvm_executableJarJvm/jvm-jvm-executable.jar
+```
 
-# Test Win Binary
+- Run on MacOS:
+
+```bash
+# Run MacOS Binary
+$ build/tasks/_macos_linkMacosArm64Release/macos.kexe
+
+# Show the logs
+$ log stream \
+  --info \
+  --style syslog \
+  --predicate 'senderImagePath ENDSWITH "macos.kexe"'
+
+$ log show \
+  --info \
+  --style syslog \
+  --predicate 'senderImagePath ENDSWITH "macos.kexe"' \
+  --last 5m
+  
+# Run Win Binary
 $ docker run --rm --platform="linux/amd64" \
              -e DISPLAY=host.docker.internal:0 \
              -v "$PWD":/work \
-             scottyhardy/docker-wine:latest wine /work/build/tasks/_windows_linkMingwX64Release/windows.exe
-
+             scottyhardy/docker-wine:latest wine /work/build/tasks/_windows_linkMingwX64Release/windows.exe  
 ```
 
 > [!TIP]
