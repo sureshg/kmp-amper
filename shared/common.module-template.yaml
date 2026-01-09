@@ -125,6 +125,8 @@ settings@web:
       - kotlin.js.ExperimentalJsExport
       - kotlin.js.ExperimentalWasmJsInterop
 
+    jsPlainObjects: enabled
+
 test-settings:
   kotlin:
     powerAssert:
