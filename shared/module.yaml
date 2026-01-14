@@ -30,6 +30,7 @@ dependencies:
   - $libs.ktor.serialization.json: exported
   - $libs.ajalt.clikt: exported
   - $libs.ajalt.clikt.markdown: exported
+  - $libs.kotlinx.schema.annotations: exported
 
 dependencies@jvm:
   - $libs.slf4j.api: exported

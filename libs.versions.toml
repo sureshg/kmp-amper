@@ -6,7 +6,7 @@ kotlin-jvmtarget               = "21"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.3"
 kotlin-lang-version            = "2.3"
-gradle                         = "9.3.0-rc-2"
+gradle                         = "9.3.0-rc-3"
 java-vendor                    = "Oracle"
 java-jvmargs                   = "--enable-preview"
 java-addmodules                = "jdk.incubator.vector"
@@ -38,9 +38,10 @@ kotlinx-browser                = "0.5.0"
 kotlinx-benchmark              = "0.4.15"
 kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
+kotlinx-schema                 = "0.0.3"
 kotlinx-reflect-lite           = "1.2.0-RC"
 kotlin-lincheck                = "3.4"
-kotlin-wrappers                = "2026.1.4"
+kotlin-wrappers                = "2026.1.5"
 kotlin-redacted                = "1.15.1"
 kotlin-serviceloader           = "0.0.22"
 kotlinx-multik                 = "0.2.3"
@@ -116,7 +117,7 @@ jmh                            = "1.37"
 mrjar                          = "0.1.1"
 ktfmt                          = "0.61"
 google-javaformat              = "1.33.0"
-palantir-javaformat            = "2.83.0"
+palantir-javaformat            = "2.84.0"
 google-auto-value              = "1.11.1"
 google-auto-service            = "1.1.1"
 google-tink                    = "1.20.0"
@@ -150,7 +151,7 @@ java-keychain                  = "1.1.0"
 arrow-suspendapp               = "2.2.1.1"
 hikariCP                       = "7.0.2"
 h2                             = "2.4.240"
-micrometer                     = "1.16.1"
+micrometer                     = "1.16.2"
 swagger-ui                     = "5.17.14"
 hoplite                        = "3.0.0.RC1"
 config4k                       = "0.7.0"
@@ -245,7 +246,7 @@ swagger-style                  = "https://unpkg.com/swagger-ui-themes@3.0.1/them
 
 # Plugin versions
 benmanes                       = "0.53.0"
-caupain                        = "1.7.1"
+caupain                        = "1.8.0"
 foojay-resolver                = "1.0.0"
 gradle-develocity              = "4.3"
 nmcp                           = "1.4.3"
@@ -317,6 +318,9 @@ kotlinx-io-filesystem                = { module = "org.jetbrains.kotlinx:kotlinx
 kotlinx-io-okio                      = { module = "org.jetbrains.kotlinx:kotlinx-io-okio"                           , version.ref = "kotlinx-io"}
 kotlinx-fuzz-jazzer                  = { module = "org.jetbrains:kotlinx.fuzz.jazzer"                               , version.ref = "kotlinx-fuzz"}
 kotlinx-reflect-lite                 = { module = "org.jetbrains.kotlinx:kotlinx.reflect.lite"                      , version.ref = "kotlinx-reflect-lite"}
+kotlinx-schema-ksp                   = { module = "org.jetbrains.kotlinx:kotlinx-schema-ksp"                        , version.ref = "kotlinx-schema"}
+kotlinx-schema-annotations           = { module = "org.jetbrains.kotlinx:kotlinx-schema-annotations"                , version.ref = "kotlinx-schema"}
+kotlinx-schema-json                  = { module = "org.jetbrains.kotlinx:kotlinx-schema-json"                       , version.ref = "kotlinx-schema"}
 kotlinx-collections-immutable        = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable"             , version.ref = "kotlinx-collections-immutable"}
 kotlinx-html                         = { module = "org.jetbrains.kotlinx:kotlinx-html"                              , version.ref = "kotlinx-html"}
 kotlinx-browser                      = { module = "org.jetbrains.kotlinx:kotlinx-browser"                           , version.ref = "kotlinx-browser"}

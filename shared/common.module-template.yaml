@@ -55,6 +55,8 @@ settings:
 
     ksp:
       version: 2.3.4
+      processors:
+        - $libs.kotlinx.schema.ksp
 
   publishing:
     enabled: true
