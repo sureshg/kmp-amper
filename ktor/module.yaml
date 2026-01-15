@@ -17,6 +17,9 @@ dependencies:
   - $libs.ktor.server.di
   - $libs.ktor.server.jetty.jakarta
   - $libs.logback.classic
+  - $libs.kotlinx.rpc.krpc.ktor.server
+  - $libs.kotlinx.rpc.krpc.ktor.client
+  - $libs.kotlinx.rpc.krpc.ser.json
 
 test-dependencies:
   - $libs.ktor.server.test.host
