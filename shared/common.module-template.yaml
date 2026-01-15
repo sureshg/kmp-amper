@@ -18,7 +18,7 @@ settings:
     release: 25
     storeParameterNames: true
     jdk:
-      version: 27
+      version: 25
       distributions: [ oracleOpenJdk, zulu ]
 
   kotlin:
