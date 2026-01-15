@@ -3,17 +3,26 @@ repositories:
     url: mavenLocal
     resolve: false
     publish: true
+# - id: mavenCentral
+#   url: https://cache-redirector.jetbrains.com/repo.maven.apache.org/maven2
+# - id: gradle
+#   url: https://cache-redirector.jetbrains.com/plugins.gradle.org/m2
 
 settings:
+  publishing:
+    enabled: true
+    group: dev.suresh.amper
+    version: 1.0.0-SNAPSHOT
+
   jvm:
     release: 25
     storeParameterNames: true
     jdk:
-      version: 25
+      version: 27
       distributions: [ oracleOpenJdk, zulu ]
 
   kotlin:
-    version: 2.3.20-Beta1
+    version: 2.3.0
     languageVersion: 2.3
     apiVersion: 2.3
     progressiveMode: true
@@ -34,6 +43,7 @@ settings:
       - -Xannotation-default-target=param-property
       - -Xdata-flow-based-exhaustiveness
       - -Xexplicit-backing-fields
+      - -Xconsistent-data-class-copy-visibility
     # - -Xannotation-target-all
     # - -Xskip-prerelease-check
     # - -Xsuppress-warning=CAN_BE_VAL
@@ -58,10 +68,9 @@ settings:
       processors:
         - $libs.kotlinx.schema.ksp
 
-  publishing:
-    enabled: true
-    group: dev.suresh.amper
-    version: 1.0.0-SNAPSHOT
+    rpc:
+      version: 0.10.1
+      enabled: true
 
 settings@jvm:
   java:
