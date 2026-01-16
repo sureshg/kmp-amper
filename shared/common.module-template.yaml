@@ -69,8 +69,9 @@ settings:
         - $libs.kotlinx.schema.ksp
 
     rpc:
-      version: 0.10.1
       enabled: true
+      version: 0.10.2
+      annotationTypeSafetyEnabled: true
 
 settings@jvm:
   java:
