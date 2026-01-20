@@ -6,7 +6,7 @@ Kotlin Multiplatform Project - AI Instructions
 
 ## Tech Stack
 
-- **Kotlin**: 2.3.0 (use the latest features)
+- **Kotlin**: Always use the latest version
 - **Build System**: Amper (latest dev version)
 - **Java Target**: 25
 - **Platform**: Kotlin Multiplatform
