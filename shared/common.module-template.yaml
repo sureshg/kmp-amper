@@ -132,6 +132,7 @@ settings@web:
       - -Xes-long-as-bigint
       - -Xir-per-file
       - -Xwasm-use-new-exception-proposal
+      - -Xenable-suspend-function-exporting
     # - -Xir-per-module
     optIns:
       - kotlin.js.ExperimentalJsExport
