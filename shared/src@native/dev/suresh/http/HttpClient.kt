@@ -11,7 +11,7 @@ actual fun httpClient(
     timeout: Timeout,
     retry: Retry,
     httpLogger: KLogger,
-    config: HttpClientConfigurer
+    config: HttpClientConfigurer,
 ) =
     HttpClient(Curl) {
       config(this)
@@ -23,5 +23,6 @@ actual fun httpClient(
           httpLogger.warn { "Setting cacertBundle to $caInfo" }
         }
         sslVerify = true
+        // dispatcher = Dispatchers.IO
       }
     }
