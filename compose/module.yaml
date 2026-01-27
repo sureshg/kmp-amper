@@ -8,7 +8,7 @@ settings:
   jvm:
     mainClass: MainKt
   compose:
-    version: 1.11.0-alpha01
+    version: 1.11.0-alpha02
     enabled: true
     resources:
       enabled: true
