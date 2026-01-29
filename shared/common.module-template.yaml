@@ -30,7 +30,7 @@ settings:
     # extraEnvironment
 
   kotlin:
-    version: 2.3.20-Beta1
+    version: 2.3.20-Beta2
     languageVersion: 2.3
     apiVersion: 2.3
     progressiveMode: true
@@ -41,15 +41,10 @@ settings:
       - -Wextra
       - -Xcontext-parameters
       - -Xexpect-actual-classes
-      - -Xwhen-guards
-      - -Xmulti-dollar-interpolation
-      - -Xnon-local-break-continue
-      - -Xnested-type-aliases
       - -Xreport-all-warnings
       - -Xreturn-value-checker=check
       - -Xcontext-sensitive-resolution
       - -Xannotation-default-target=param-property
-      - -Xdata-flow-based-exhaustiveness
       - -Xexplicit-backing-fields
       - -Xconsistent-data-class-copy-visibility
     # - -Xannotation-target-all
