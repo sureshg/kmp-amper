@@ -17,9 +17,9 @@
 setlocal
 
 @rem The version of the Amper distribution to provision and use
-set amper_version=0.10.0-dev-3633
+set amper_version=0.10.0-dev-3638
 @rem Establish chain of trust from here by specifying exact checksum of Amper distribution to be run
-set amper_sha256=348db3f0e1527df427ec9d443d48fd60a7d6ac6f5015a06400ca03184ee826c4
+set amper_sha256=cb352aac608d13231e85f5655d770036c753606a79ee149279a37a57c6feb710
 
 if not defined AMPER_DOWNLOAD_ROOT set AMPER_DOWNLOAD_ROOT=https://packages.jetbrains.team/maven/p/amper/amper
 if not defined AMPER_JRE_DOWNLOAD_ROOT set AMPER_JRE_DOWNLOAD_ROOT=https:/
@@ -133,20 +133,6 @@ set amper_url=%AMPER_DOWNLOAD_ROOT%/org/jetbrains/amper/amper-cli/%amper_version
 set amper_target_dir=%AMPER_BOOTSTRAP_CACHE_DIR%\amper-cli-%amper_version%
 call :download_and_extract "Amper distribution v%amper_version%" "%amper_url%" "%amper_target_dir%" "%amper_sha256%" "256" "true"
 if errorlevel 1 goto fail
-
-REM !! DO NOT REMOVE !!
-REM There is a command at the end of this line:                                                                                                                                                                                                                                                                                                                  exit /b %ERRORLEVEL%
-REM
-REM The above comment is strategically placed to compensate for a bug in the update command in Amper 0.5.0.
-REM During the update, the wrapper script is overwritten in-place while running. The problem is that cmd.exe doesn't
-REM buffer the original script as a whole, and instead reloads it after every command, and tries to resume at the same
-REM byte offset as before.
-REM In the 0.5.0 script, the java command running Amper is followed by the command 'exit /b %ERRORLEVEL%', which is
-REM exactly at the byte offset 6826. So, when the java command finishes, cmd.exe wants to run this exit command, but
-REM it first reloads the file and gets the new content (this one) before trying to run whatever is at offset 6826.
-REM We must place an exit command right at that offset to allow 0.5.0 to complete properly.
-REM Since there are version/checksum placeholders at the top of this template wrapper file, we need to dynamically
-REM adjust the position of the exit command, hence the padding placeholder.
 
 REM ********** Provision JRE for Amper **********
 

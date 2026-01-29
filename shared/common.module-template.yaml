@@ -20,6 +20,14 @@ settings:
     jdk:
       version: 25
       distributions: [ oracleOpenJdk, zulu ]
+      # selectionMode: javaHome
+    test:
+      junitPlatformVersion: 6.1.0-M1
+      freeJvmArgs:
+        - --add-modules=jdk.incubator.vector
+    #   - --enable-preview
+    # systemProperties:
+    # extraEnvironment
 
   kotlin:
     version: 2.3.20-Beta1
@@ -64,7 +72,7 @@ settings:
       format: json
 
     ksp:
-      version: 2.3.4
+      version: 2.3.5
       processors:
         - $libs.kotlinx.schema.ksp
 
@@ -151,9 +159,3 @@ test-settings:
         - kotlin.test.assertEquals
         - kotlin.test.assertNull
 
-test-settings@jvm:
-  jvm:
-    test:
-      freeJvmArgs:
-        - --add-modules=jdk.incubator.vector
-      # - --enable-preview
