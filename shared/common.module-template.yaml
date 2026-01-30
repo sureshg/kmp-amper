@@ -42,7 +42,7 @@ settings:
       - -Xcontext-parameters
       - -Xexpect-actual-classes
       - -Xreport-all-warnings
-      - -Xreturn-value-checker=check
+      - -Xreturn-value-checker=full
       - -Xcontext-sensitive-resolution
       - -Xannotation-default-target=param-property
       - -Xexplicit-backing-fields
