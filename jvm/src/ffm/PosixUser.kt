@@ -26,24 +26,32 @@ object PosixUser {
 
   private const val GETPW_R_SIZE_MAX = 4096
 
-  private val mhGetgroups by lazy {
-    downcallHandle(
-        "getgroups",
-        FunctionDescriptor.of(C_INT, C_INT, C_POINTER),
-        Linker.Option.captureCallState("errno"),
-    )
-  }
+  private val requiresIntAsLong =
+      System.getProperty("os.arch", "").lowercase() in setOf("ppc64", "ppc64le", "s390x")
 
-  private val mhGetuid by lazy { downcallHandle("getuid", FunctionDescriptor.of(C_INT)) }
+  private val mhGetgroups =
+      downcallHandle(
+          "getgroups",
+          FunctionDescriptor.of(C_INT, C_INT, C_POINTER),
+          Linker.Option.captureCallState("errno"),
+      )
 
-  private val mhGetpwuidR by lazy {
-    downcallHandle(
-        "getpwuid_r",
-        FunctionDescriptor.of(C_INT, C_INT, C_POINTER, C_POINTER, C_SIZE_T, C_POINTER),
-    )
-  }
+  private val mhGetuid = downcallHandle("getuid", FunctionDescriptor.of(C_INT))
 
-  private val ML_PASSWD: GroupLayout =
+  private val mhGetpwuidR =
+      downcallHandle(
+          "getpwuid_r",
+          FunctionDescriptor.of(
+              C_INT,
+              if (requiresIntAsLong) C_LONG else C_INT,
+              C_POINTER,
+              C_POINTER,
+              C_SIZE_T,
+              C_POINTER,
+          ),
+      )
+
+  private val passwdLayout: GroupLayout =
       MemoryLayout.structLayout(
           C_POINTER.withName("pw_name"),
           C_POINTER.withName("pw_passwd"),
@@ -52,9 +60,9 @@ object PosixUser {
           MemoryLayout.paddingLayout(100),
       )
 
-  private val vhPwUid: VarHandle = ML_PASSWD.varHandle(groupElement("pw_uid"))
-  private val vhPwGid: VarHandle = ML_PASSWD.varHandle(groupElement("pw_gid"))
-  private val vhPwName: VarHandle = ML_PASSWD.varHandle(groupElement("pw_name"))
+  private val vhPwUid: VarHandle = passwdLayout.varHandle(groupElement("pw_uid"))
+  private val vhPwGid: VarHandle = passwdLayout.varHandle(groupElement("pw_gid"))
+  private val vhPwName: VarHandle = passwdLayout.varHandle(groupElement("pw_name"))
 
   init {
     Arena.ofConfined().use { arena ->
@@ -65,27 +73,27 @@ object PosixUser {
 
       val gs = arena.allocate(C_INT, groupNum.toLong())
       groupNum = mhGetgroups.invokeExact(capturedState, groupNum, gs) as Int
-      if (groupNum == -1) {
-        val err = errno(capturedState)
-        error("getgroups returns $groupNum. Reason: ${strerror(err)}")
-      }
+      if (groupNum == -1)
+          error("getgroups returns $groupNum. Reason: ${strerror(errno(capturedState))}")
 
       groups = List(groupNum) { gs.getAtIndex(C_INT, it.toLong()).toUInt().toLong() }
 
-      val pwd = arena.allocate(ML_PASSWD)
+      val pwd = arena.allocate(passwdLayout)
       val result = arena.allocate(C_POINTER)
       val buffer = arena.allocate(GETPW_R_SIZE_MAX.toLong())
-      val tmpUid = mhGetuid.invokeExact() as Int
+      val tmpUid = (mhGetuid.invokeExact() as Int).toUInt().toLong()
 
-      // Do not call invokeExact because the type of buffer_size is not always long in the underlying system.
-      val out = mhGetpwuidR.invoke(tmpUid, pwd, buffer, GETPW_R_SIZE_MAX, result) as Int
+      val out =
+          if (requiresIntAsLong) {
+            mhGetpwuidR.invoke(tmpUid, pwd, buffer, GETPW_R_SIZE_MAX, result) as Int
+          } else {
+            mhGetpwuidR.invoke(tmpUid.toInt(), pwd, buffer, GETPW_R_SIZE_MAX, result) as Int
+          }
+
       when {
-        out != 0 -> {
-            error(strerror(out))
-        }
-        result.get(ValueLayout.ADDRESS, 0) == MemorySegment.NULL -> {
-            error("user entry not found")
-        }
+        out != 0 -> error(strerror(out))
+        result.get(ValueLayout.ADDRESS, 0) == NULL ->
+            error("the requested entry is not found")
         else -> {
           uid = (vhPwUid.get(pwd, 0L) as Int).toUInt().toLong()
           gid = (vhPwGid.get(pwd, 0L) as Int).toUInt().toLong()
