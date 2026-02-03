@@ -18,16 +18,17 @@ $ ./amper package
 $ ./amper test
 
 # Run the app
-$ ./amper run --jvm-args=--enable-preview -m jvm
+$ ./amper run -m app \
+              --jvm-args="--enable-preview --add-modules=jdk.incubator.vector --enable-native-access=ALL-UNNAMED"
 $ ./amper run -m macos --platform macosArm64
 
 # JDK Incubator modules
-$ ./amper run -m jvm \
+$ ./amper run -m app \
               --jvm-args="--enable-preview --add-modules=jdk.incubator.vector --enable-native-access=ALL-UNNAMED" \
               --main-class=AppKt
 
 # Dependency insights
-$ ./amper show dependencies -m jvm --scope=runtime --filter=org.jetbrains.kotlin:kotlin-stdlib
+$ ./amper show dependencies -m app --scope=runtime --filter=org.jetbrains.kotlin:kotlin-stdlib
 
 # Check version updates in amper version catalog
 $ brew install deezer/repo/caupain
@@ -49,7 +50,7 @@ $ find . \( -path "*/build/*" -perm +111 -o -path "*/build/tasks/*executableJar*
 $ java --enable-preview \
        --add-modules=jdk.incubator.vector \
        --enable-native-access=ALL-UNNAMED \
-       -jar build/tasks/_jvm_executableJarJvm/jvm-jvm-executable.jar
+       -jar build/tasks/_app_executableJarJvm/app-jvm-executable.jar
 ```
 
 - Run on MacOS:

@@ -1,11 +1,11 @@
 modules:
   - shared
-  - jvm
-  - ktor
+  - jvm/app
+  - jvm/compose
+  - jvm/ktor
   - native/linux
   - native/macos
   - native/windows
-  - compose
   - plugins/build-config
 # - web/js
 # - web/wasm
