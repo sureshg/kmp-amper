@@ -44,6 +44,34 @@ $ find . \( -path "*/build/*" -perm +111 -o -path "*/build/tasks/*executableJar*
 
 ```
 
+### Self-Contained Binaries
+
+Package Amper executable JARs with [jbundle](https://github.com/avelino/jbundle) to create optimized self-contained native bundles.
+
+```bash
+# Extract JAR contents
+$ jar -xf build/tasks/_ktor_executableJarJvm/ktor-jvm-executable.jar
+
+# Note: jarmode layertools not currently supported for Amper JARs
+# $ java -Djarmode=layertools -jar build/tasks/_ktor_executableJarJvm/ktor-jvm-executable.jar extract
+
+# Detect required Java modules
+$ jdeps -q \
+        -R \
+        --ignore-missing-deps \
+        --print-module-deps \
+        --multi-release=25 \
+        --class-path "BOOT-INF/lib/*" \
+        BOOT-INF/classes
+
+# Build native bundle (download jbundle from https://github.com/avelino/jbundle/releases/tag/latest)
+$ jbundle build --no-appcds \
+      --input build/tasks/_ktor_executableJarJvm/ktor-jvm-executable.jar \
+      --jvm-args="--enable-preview" \
+      --modules java.base,java.desktop,java.instrument,java.management \
+      --output ktor-app
+```
+
 - Run on JVM
 
 ```bash
