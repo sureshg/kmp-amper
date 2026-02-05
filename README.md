@@ -39,9 +39,31 @@ $ ./amper publish mavenLocal
 
 # List all the binaries
 $ find . \( -path "*/build/*" -type f -perm +111 -o -path "*/build/*executableJar*/*.jar" \) | grep -v -E "(test|debug|dSYM)" | xargs du -h | sort -hr
-
 $ find . \( -path "*/build/*" -perm +111 -o -path "*/build/tasks/*executableJar*/*.jar" \) -type f -ls | awk '{printf "%.3fM %s\n",$7/1048576,$NF}' | sort -rn
 
+```
+
+### Running Binaries
+
+```bash
+# Run on JVM
+$ java --enable-preview \
+       --add-modules=jdk.incubator.vector \
+       --enable-native-access=ALL-UNNAMED \
+       -jar build/tasks/_app_executableJarJvm/app-jvm-executable.jar
+
+# Run on MacOS
+$ build/tasks/_macos_linkMacosArm64Release/macos.kexe
+
+# Run on Windows
+$ docker run --rm --platform="linux/amd64" \
+             -e DISPLAY=host.docker.internal:0 \
+             -v "$PWD":/work \
+             scottyhardy/docker-wine:latest wine /work/build/tasks/_windows_linkMingwX64Release/windows.exe
+
+# Show MacOS logs
+$ log stream --info --style syslog --predicate 'senderImagePath ENDSWITH "macos.kexe"'
+$ log show --info --style syslog --predicate 'senderImagePath ENDSWITH "macos.kexe"' --last 5m
 ```
 
 ### Self-Contained Binaries
@@ -55,55 +77,15 @@ $ jar -xf build/tasks/_ktor_executableJarJvm/ktor-jvm-executable.jar
 # Note: jarmode layertools not currently supported for Amper JARs
 # $ java -Djarmode=layertools -jar build/tasks/_ktor_executableJarJvm/ktor-jvm-executable.jar extract
 
-# Detect required Java modules
-$ jdeps -q \
-        -R \
-        --ignore-missing-deps \
-        --print-module-deps \
-        --multi-release=25 \
-        --class-path "BOOT-INF/lib/*" \
-        BOOT-INF/classes
+# Detect required Java modules and build bundle
+$ MODULES=$(jdeps -q -R --ignore-missing-deps --print-module-deps --multi-release=25 --class-path "BOOT-INF/lib/*" BOOT-INF/classes)
 
 # Build native bundle (download jbundle from https://github.com/avelino/jbundle/releases/tag/latest)
 $ jbundle build --no-appcds \
       --input build/tasks/_ktor_executableJarJvm/ktor-jvm-executable.jar \
       --jvm-args="--enable-preview" \
-      --modules java.base,java.desktop,java.instrument,java.management \
-      --output ktor-app
-```
-
-- Run on JVM
-
-```bash
-$ java --enable-preview \
-       --add-modules=jdk.incubator.vector \
-       --enable-native-access=ALL-UNNAMED \
-       -jar build/tasks/_app_executableJarJvm/app-jvm-executable.jar
-```
-
-- Run on MacOS:
-
-```bash
-# Run MacOS Binary
-$ build/tasks/_macos_linkMacosArm64Release/macos.kexe
-
-# Show the logs
-$ log stream \
-  --info \
-  --style syslog \
-  --predicate 'senderImagePath ENDSWITH "macos.kexe"'
-
-$ log show \
-  --info \
-  --style syslog \
-  --predicate 'senderImagePath ENDSWITH "macos.kexe"' \
-  --last 5m
-  
-# Run Win Binary
-$ docker run --rm --platform="linux/amd64" \
-             -e DISPLAY=host.docker.internal:0 \
-             -v "$PWD":/work \
-             scottyhardy/docker-wine:latest wine /work/build/tasks/_windows_linkMingwX64Release/windows.exe  
+      --modules $MODULES \
+      --output ktor-app  
 ```
 
 > [!TIP]
