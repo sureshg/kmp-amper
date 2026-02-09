@@ -14,7 +14,7 @@ settings:
       enabled: true
     experimental:
       hotReload:
-        version: 1.1.0-alpha04
+        version: 1.1.0-alpha05
 
 dependencies:
   - ../../shared
