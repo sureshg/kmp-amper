@@ -54,6 +54,7 @@ settings:
       - kotlin.ExperimentalStdlibApi
       - kotlin.ExperimentalUnsignedTypes
       - kotlin.contracts.ExperimentalContracts
+      - kotlin.contracts.ExperimentalExtendedContracts
       - kotlin.io.encoding.ExperimentalEncodingApi
       - kotlin.time.ExperimentalTime
       - kotlinx.coroutines.ExperimentalCoroutinesApi
