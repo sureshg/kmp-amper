@@ -1,9 +1,11 @@
+import db.select
 import ffm.*
 import genai.voices
 import io.roastedroot.lumis4j.core.*
 
 suspend fun main() {
   System.setProperty("slf4j.internal.verbosity", "WARN")
+  select()
   println(PosixUser)
   mediaClient()
   vectorApi()

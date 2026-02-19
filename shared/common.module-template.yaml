@@ -30,7 +30,7 @@ settings:
     # extraEnvironment
 
   kotlin:
-    version: 2.3.20-Beta2
+    version: 2.3.10
     languageVersion: 2.3
     apiVersion: 2.3
     progressiveMode: true
@@ -50,6 +50,21 @@ settings:
     # - -Xannotation-target-all
     # - -Xskip-prerelease-check
     # - -Xsuppress-warning=CAN_BE_VAL
+    compilerPlugins:
+      - id: com.javiersc.kotlin.kopy-compiler
+        dependency: $libs.kopy.compilerPlugin
+
+      - id: io.exoquery.exoquery-plugin
+        dependency: $libs.exoquery.compilerPlugin
+
+      - id: dev.zacsweers.redacted.compiler
+        dependency: $libs.kotlin.redacted.compilerPlugin
+        options:
+          enabled: true
+          replacementString: "█"
+          redactedAnnotations: dev/zacsweers/redacted/annotations/Redacted
+          unredactedAnnotations: dev/zacsweers/redacted/annotations/Unredacted
+
     optIns:
       - kotlin.ExperimentalStdlibApi
       - kotlin.ExperimentalUnsignedTypes
@@ -62,6 +77,7 @@ settings:
       - kotlin.ExperimentalMultiplatform
       - kotlin.uuid.ExperimentalUuidApi
       - kotlin.concurrent.atomics.ExperimentalAtomicApi
+      - com.javiersc.kotlin.kopy.KopyOptIn
 
     serialization:
       version: 1.10.0

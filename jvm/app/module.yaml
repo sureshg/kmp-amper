@@ -16,3 +16,4 @@ dependencies:
   - $libs.voices.en.us
   - $libs.onnxruntime
   - $libs.lumis4j
+  - $libs.exoquery.runner.jdbc

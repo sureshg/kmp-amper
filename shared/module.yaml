@@ -34,6 +34,8 @@ dependencies:
   - $libs.ajalt.clikt: exported
   - $libs.ajalt.clikt.markdown: exported
   - $libs.kotlinx.schema.annotations: exported
+  - $libs.kotlin.redacted.annotations: exported
+  - $libs.kopy.runtime: exported
 
 dependencies@jvm:
   - $libs.slf4j.api: exported
