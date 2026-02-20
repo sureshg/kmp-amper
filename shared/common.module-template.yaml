@@ -30,7 +30,7 @@ settings:
     # extraEnvironment
 
   kotlin:
-    version: 2.3.10
+    version: 2.3.20-RC
     languageVersion: 2.3
     apiVersion: 2.3
     progressiveMode: true
@@ -54,8 +54,8 @@ settings:
       - id: com.javiersc.kotlin.kopy-compiler
         dependency: $libs.kopy.compilerPlugin
 
-      - id: io.exoquery.exoquery-plugin
-        dependency: $libs.exoquery.compilerPlugin
+      # - id: io.exoquery.exoquery-plugin
+      #   dependency: $libs.exoquery.compilerPlugin
 
       - id: dev.zacsweers.redacted.compiler
         dependency: $libs.kotlin.redacted.compilerPlugin
