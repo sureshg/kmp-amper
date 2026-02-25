@@ -85,8 +85,6 @@ settings:
 
     ksp:
       version: 2.3.6
-      processors:
-        - $libs.kotlinx.schema.ksp
 
     rpc:
       enabled: true

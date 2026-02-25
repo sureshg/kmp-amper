@@ -47,17 +47,17 @@ kotlin-serviceloader           = "0.0.22"
 kotlinx-multik                 = "0.2.3"
 kotlin-statistics              = "0.4.0-RC1"
 kotlin-base32                  = "1.0.0"
-gradle-kotlin-dsl              = "6.5.2"
+gradle-kotlin-dsl              = "6.5.3"
 exoquery-plugin                = "2.3.0-2.0.4.PL"
 exoquery-sql                   = "2.0.4.PL"
 exposed                        = "1.0.0"
 postgresql                     = "42.7.10"
-embedded-postgres              = "2.2.0"
+embedded-postgres              = "2.2.1"
 embedded-postgres-bom          = "18.2.0"
 evas                           = "1.4.0"
 kopy                           = "0.22.0+2.3.10"
 poko                           = "0.21.1"
-mappie                         = "2.3.10-2.4.0"
+mappie                         = "2.3.10-2.4.1"
 akkurate                       = "0.11.0"
 kaml                           = "0.104.0"
 snakeyaml-engine-kmp           = "4.0.1"
@@ -112,7 +112,6 @@ wiremock-kotlin                = "2.1.1"
 okhttp                         = "5.3.2"
 slf4j                          = "2.1.0-alpha1"
 logback                        = "1.5.32"
-logback-tyler                  = "1.0.3"
 log4j                          = "3.0.0-beta3"
 jmh                            = "1.37"
 mrjar                          = "0.1.1"
@@ -125,7 +124,7 @@ google-tink                    = "1.20.0"
 graalvm                        = "25.0.2"
 jspecify                       = "1.0.0"
 rsocket                        = "0.20.0"
-jctools                        = "4.0.5"
+jctools                        = "4.0.6"
 caffeine-coroutines            = "2.0.4"
 kotlin-codepoints              = "0.11.0"
 kotlin-logging                 = "8.0.01"
@@ -149,7 +148,6 @@ parsus                         = "0.6.1"
 ksoup                          = "0.2.6"
 java-keyring                   = "1.0.4"
 java-keychain                  = "1.1.0"
-arrow-suspendapp               = "2.2.1.1"
 hikariCP                       = "7.0.2"
 h2                             = "2.4.240"
 micrometer                     = "1.16.3"
@@ -212,6 +210,7 @@ rwmutex                        = "1.0.0"
 bluesky-ozone                  = "0.3.3"
 cidre                          = "0.3.1"
 voices                         = "0.0.9"
+inference4j                    = "0.8.0"
 onnx                           = "1.24.2"
 angus-mail                     = "2.1.0-M1"
 simplemail                     = "8.12.6"
@@ -237,7 +236,7 @@ antdesign                      = "1.0.0"
 compose-fluent                 = "0.1.0"
 kottie                         = "2.2.0"
 mosaic                         = "0.18.0"
-filekit-dialogs                = "0.12.0"
+filekit-dialogs                = "0.13.0"
 
 # NPM Dependencies
 npm-highlightjs                = "11.11.1"
@@ -279,7 +278,7 @@ animalsniffer                  = "2.0.1"
 badass-runtime                 = "2.0.1"
 badass-jlink                   = "3.2.1"
 jlink-jib                      = "0.6.0"
-jextract                       = "1.2.0"
+jextract                       = "1.3.0"
 maven-plugin-api               = "4.0.0-rc-5"
 maven-plugin-annotations       = "3.15.1"
 gradlex-maven-plugin           = "1.0.3"
@@ -321,6 +320,7 @@ kotlinx-reflect-lite                 = { module = "org.jetbrains.kotlinx:kotlinx
 kotlinx-schema-ksp                   = { module = "org.jetbrains.kotlinx:kotlinx-schema-ksp"                        , version.ref = "kotlinx-schema"}
 kotlinx-schema-annotations           = { module = "org.jetbrains.kotlinx:kotlinx-schema-annotations"                , version.ref = "kotlinx-schema"}
 kotlinx-schema-json                  = { module = "org.jetbrains.kotlinx:kotlinx-schema-json"                       , version.ref = "kotlinx-schema"}
+kotlinx-schema-generator-json        = { module = "org.jetbrains.kotlinx:kotlinx-schema-generator-json"             , version.ref = "kotlinx-schema"}
 kotlinx-collections-immutable        = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable"             , version.ref = "kotlinx-collections-immutable"}
 kotlinx-html                         = { module = "org.jetbrains.kotlinx:kotlinx-html"                              , version.ref = "kotlinx-html"}
 kotlinx-browser                      = { module = "org.jetbrains.kotlinx:kotlinx-browser"                           , version.ref = "kotlinx-browser"}
@@ -432,8 +432,6 @@ akkurate-ksp-plugin                  = { module = "dev.nesk.akkurate:akkurate-ks
 okio-bom                             = { module = "com.squareup.okio:okio-bom"                                 , version.ref = "okio"}
 okio                                 = { module = "com.squareup.okio:okio"                                     , version.ref = "okio"}
 okio-fakefilesystem                  = { module = "com.squareup.okio:okio-fakefilesystem"                      , version.ref = "okio"}
-arrow-suspendapp                     = { module = "io.arrow-kt:suspendapp"                                     , version.ref = "arrow-suspendapp" }
-arrow-suspendapp-ktor                = { module = "io.arrow-kt:suspendapp-ktor"                                , version.ref = "arrow-suspendapp" }
 kmp-appdirs                          = { module = "ca.gosyer:kotlin-multiplatform-appdirs"                     , version.ref = "kmp-appdirs"}
 
 bc-prov-jdk18on                      = { module = "org.bouncycastle:bcprov-jdk18on"                            , version.ref = "bc"}
@@ -580,7 +578,6 @@ slf4j-simple                         = { module = "org.slf4j:slf4j-simple"      
 slf4j-nop                            = { module = "org.slf4j:slf4j-nop"                                        , version.ref = "slf4j"}
 slf4j-jul                            = { module = "org.slf4j:jul-to-slf4j"                                     , version.ref = "slf4j"}
 logback-core                         = { module = "ch.qos.logback:logback-core"                                , version.ref = "logback"}
-logback-tyler                        = { module = "ch.qos.logback.tyler:tyler-base"                            , version.ref = "logback-tyler"}
 slf4j-jpl                            = { module = "org.slf4j:slf4j-jdk-platform-logging"                       , version.ref = "slf4j"}
 log4j-bom                            = { module = "org.apache.logging.log4j:log4j-bom"                         , version.ref = "log4j"}
 log4j-core                           = { module = "org.apache.logging.log4j:log4j-core"                        , version.ref = "log4j"}
@@ -734,7 +731,8 @@ koog-tools                           = { module = "ai.koog:agents-tools"        
 koog-executor-openai                 = { module = "ai.koog:prompt-executor-openai-client"                                   , version.ref = "koog" }
 koog-features-eventhandler           = { module = "ai.koog:agents-features-event-handler"                                   , version.ref = "koog" }
 koog-ktor                            = { module = "ai.koog:koog-ktor"                                                       , version.ref = "koog"}
-dokimos-koog                         = { module = "dev.dokimos:dokimos-koog"                                                  , version.ref = "dokimos" }
+inference4j-genai                    = { module = "io.github.inference4j:inference4j-genai"                                 , version.ref = "inference4j"}
+dokimos-koog                         = { module = "dev.dokimos:dokimos-koog"                                                , version.ref = "dokimos" }
 voices-chorus                        = { module = "org.pitest.voices:chorus"                                                , version.ref = "voices" }
 voices-alba                          = { module = "org.pitest.voices:alba"                                                  , version.ref = "voices" }
 voices-en-uk                         = { module = "org.pitest.voices:en_uk"                                                 , version.ref = "voices" }

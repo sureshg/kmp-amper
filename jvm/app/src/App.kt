@@ -1,6 +1,10 @@
+import dev.suresh.http.*
 import ffm.*
 import genai.voices
 import io.roastedroot.lumis4j.core.*
+import kotlinx.schema.generator.json.JsonSchemaConfig
+import kotlinx.schema.generator.json.serialization.*
+import kotlinx.schema.json.encodeToString
 
 suspend fun main() {
   System.setProperty("slf4j.internal.verbosity", "WARN")
@@ -10,6 +14,7 @@ suspend fun main() {
   vectorApi()
   syntaxHighlight()
   voices()
+  jsonSchema()
 }
 
 fun syntaxHighlight() {
@@ -33,4 +38,16 @@ fun syntaxHighlight() {
             .string()
     )
   }
+}
+
+fun jsonSchema() {
+  val generator =
+      SerializationClassJsonSchemaGenerator(
+          jsonSchemaConfig = JsonSchemaConfig.Strict,
+      )
+
+  val schema = generator.generateSchema(ErrorStatus.serializer().descriptor)
+  val schemaString = schema.encodeToString(json)
+
+  println(schemaString)
 }

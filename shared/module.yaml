@@ -33,7 +33,7 @@ dependencies:
   - $libs.ktor.serialization.json: exported
   - $libs.ajalt.clikt: exported
   - $libs.ajalt.clikt.markdown: exported
-  - $libs.kotlinx.schema.annotations: exported
+  - $libs.kotlinx.schema.generator.json: exported
   - $libs.kotlin.redacted.annotations: exported
   - $libs.kopy.runtime: exported
 
