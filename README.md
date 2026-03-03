@@ -1,8 +1,8 @@
-## 🚀 Kotlin Multiplatform CLI
+# 🅺 KMP Amper Playground
 
-A Kotlin Multiplatform command-line application targeting macOS, Windows, Linux, and JVM platforms, built
-with [Amper](https://github.com/JetBrains/amper) build tools. This project demonstrates a pleasant cross-platform
-development experience with modern Kotlin tooling.
+[![GitHub Workflow Status][gha_badge]][gha_url]
+
+A Kotlin Multiplatform CLI playground powered by [Amper](https://github.com/JetBrains/amper)
 
 ### Usage
 
@@ -68,7 +68,8 @@ $ log show --info --style syslog --predicate 'senderImagePath ENDSWITH "macos.ke
 
 ### Self-Contained Binaries
 
-Package Amper executable JARs with [jbundle](https://github.com/avelino/jbundle) to create optimized self-contained native bundles.
+Package Amper executable JARs with [jbundle](https://github.com/avelino/jbundle) to create optimized self-contained
+native bundles.
 
 ```bash
 # Extract JAR contents
@@ -99,3 +100,9 @@ $ jbundle build --no-appcds \
 | `settings.kotlin` | Settings for the Kotlin compiler, thus only apply to Kotlin sources                                                                               | 🟣 Kotlin sources               |
 | `settings.java`   | Settings for the Java compiler, thus only apply to Java sources                                                                                   | ☕ Java sources                  |
 | `settings.jvm`    | Settings that apply to both Java and Kotlin sources (some common compiler options, settings related to the JDK in general, to the test JVM, etc.) | 🔄 Both Java and Kotlin sources |
+
+<!-- Badges -->
+
+[gha_url]: https://github.com/sureshg/kmp-amper/actions/workflows/build.yaml
+
+[gha_badge]: https://img.shields.io/github/actions/workflow/status/sureshg/kmp-amper/build.yaml?branch=main&style=flat&logo=kotlin&logoColor=white&label=Amper%20Build

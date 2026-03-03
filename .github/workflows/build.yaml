@@ -3,8 +3,23 @@ name: 🏗️ Amper Build
 on:
   push:
     branches: [ main ]
+    tags: [ '*' ]
+    paths-ignore:
+      - '*.md'
+      - 'docs/**'
+      - LICENSE
   pull_request:
     branches: [ main ]
+
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   AMPER_BOOTSTRAP_CACHE_DIR: ~/.amper/boot-cache
@@ -16,8 +31,11 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: 📥 Checkout
-        uses: actions/checkout@v4
+      - name: 🛎️ Check out the source code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          submodules: recursive
 
       - name: 📦 Cache Amper binaries
         uses: actions/cache@v5
@@ -55,14 +73,15 @@ jobs:
           restore-keys: |
             amper-project-${{ runner.os }}-
 
-      - name: 🚀 Run tests
-        run: ./amper test
+      - name: 🚀 Run package
+        id: amper-test
+        run: ./amper package
 
       - name: 📤 Upload build artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
+        if: steps.amper-test.outcome == 'success'
+        uses: actions/upload-artifact@v7
         with:
-          name: build-artifacts-${{ runner.os }}
-          path: build/
-          exclude-paths: build/logs
-          retention-days: 7
+          name: app-jvm.jar
+          path: |
+            build/tasks/_app_jarJvm/app-jvm.jar
+          if-no-files-found: error
