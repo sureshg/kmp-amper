@@ -1,0 +1,68 @@
+name: 🏗️ Amper Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  AMPER_BOOTSTRAP_CACHE_DIR: ~/.amper/boot-cache
+  AMPER_CACHE_ROOT: ~/.amper/shared-cache
+
+jobs:
+  build:
+    name: 🧪 Amper Build
+    runs-on: macos-latest
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 📦 Cache Amper binaries
+        uses: actions/cache@v5
+        with:
+          path: ${{ env.AMPER_BOOTSTRAP_CACHE_DIR }}
+          key: amper-boot-${{ runner.os }}-${{ hashFiles('amper', 'amper.bat') }}
+
+      - name: 🗄️ Cache dependencies
+        uses: actions/cache@v5
+        with:
+          path: |
+            ${{ env.AMPER_CACHE_ROOT }}/.m2.cache
+            ${{ env.AMPER_CACHE_ROOT }}/kotlin
+          key: amper-shared-deps-${{ hashFiles('project.yaml', '**/module.yaml', '**/plugin.yaml', 'amper', 'amper.bat', 'libs.versions.toml') }}
+          restore-keys: |
+            amper-shared-deps-
+
+      - name: ⬇️ Cache downloads (toolchains & JDKs)
+        uses: actions/cache@v5
+        with:
+          path: |
+            ${{ env.AMPER_CACHE_ROOT }}/download.cache
+            ${{ env.AMPER_CACHE_ROOT }}/extract.cache
+          key: amper-shared-downloads-${{ runner.os }}-${{ hashFiles('project.yaml', '**/module.yaml', '**/plugin.yaml', 'amper', 'amper.bat', 'libs.versions.toml') }}
+          restore-keys: |
+            amper-shared-downloads-${{ runner.os }}-
+
+      - name: ⚡ Cache incremental build outputs
+        uses: actions/cache@v5
+        with:
+          path: |
+            build/*
+            !build/logs
+          key: amper-project-${{ runner.os }}-${{ hashFiles('project.yaml', '**/module.yaml', '**/plugin.yaml', 'amper', 'amper.bat', 'libs.versions.toml') }}
+          restore-keys: |
+            amper-project-${{ runner.os }}-
+
+      - name: 🚀 Run tests
+        run: ./amper test
+
+      - name: 📤 Upload build artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts-${{ runner.os }}
+          path: build/
+          exclude-paths: build/logs
+          retention-days: 7
