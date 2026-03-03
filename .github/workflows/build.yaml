@@ -21,14 +21,13 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  AMPER_BOOTSTRAP_CACHE_DIR: ${{ runner.temp }}/amper/boot-cache
-  AMPER_CACHE_ROOT: ${{ runner.temp }}/amper/shared-cache
-
 jobs:
   build:
     name: 🧪 Amper Build
     runs-on: macos-latest
+    env:
+      AMPER_BOOTSTRAP_CACHE_DIR: ${{ runner.temp }}/amper/boot-cache
+      AMPER_CACHE_ROOT: ${{ runner.temp }}/amper/shared-cache
 
     steps:
       - name: 🛎️ Check out the source code
