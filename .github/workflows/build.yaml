@@ -22,8 +22,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  AMPER_BOOTSTRAP_CACHE_DIR: ~/.amper/boot-cache
-  AMPER_CACHE_ROOT: ~/.amper/shared-cache
+  AMPER_BOOTSTRAP_CACHE_DIR: ${{ runner.temp }}/amper/boot-cache
+  AMPER_CACHE_ROOT: ${{ runner.temp }}/amper/shared-cache
 
 jobs:
   build:
