@@ -12,6 +12,15 @@ on:
     branches: [ main ]
 
   workflow_dispatch:
+    inputs:
+      task:
+        description: 'Amper task to run'
+        required: false
+        default: package
+        type: choice
+        options:
+          - package
+          - build
 
 defaults:
   run:
@@ -24,6 +33,7 @@ concurrency:
 env:
   AMPER_BOOTSTRAP_CACHE_DIR: ${{ github.workspace }}/.amper/boot-cache
   AMPER_CACHE_ROOT: ${{ github.workspace }}/.amper/shared-cache
+  AMPER_TASK: ${{ inputs.task || 'package' }}
 
 jobs:
   build:
@@ -43,29 +53,26 @@ jobs:
           path: ${{ env.AMPER_BOOTSTRAP_CACHE_DIR }}
           key: amper-boot-${{ runner.os }}-${{ hashFiles('amper', 'amper.bat') }}
 
-      - name: 🛠️ Cache toolchains, JDKs & dependencies
+      - name: 🛠️ Cache toolchains & JDKs
         uses: actions/cache@v5
         with:
           path: |
             ${{ env.AMPER_CACHE_ROOT }}/download.cache
             ${{ env.AMPER_CACHE_ROOT }}/extract.cache
-            ${{ env.AMPER_CACHE_ROOT }}/.m2.cache
-            ${{ env.AMPER_CACHE_ROOT }}/kotlin
-          key: amper-shared-${{ runner.os }}-${{ hashFiles('project.yaml', '**/module.yaml', '**/plugin.yaml', 'amper', 'amper.bat', 'libs.versions.toml') }}
+          key: amper-shared-downloads-${{ runner.os }}-${{ hashFiles('project.yaml', '**/module.yaml', '**/plugin.yaml', 'amper', 'amper.bat', 'libs.versions.toml') }}
           restore-keys: |
-            amper-shared-${{ runner.os }}-
+            amper-shared-downloads-${{ runner.os }}-
 
-      - name: 🅺 Extract Kotlin version
-        run: |
-          echo "KOTLIN_VERSION=$(grep '^kotlin ' libs.versions.toml | sed 's/.*= *"\(.*\)"/\1/')" >> $GITHUB_ENV
-
-      - name: ⚙️ Cache Kotlin/Native konan toolchains
+      - name: 📦 Cache Maven & Kotlin dependencies
         uses: actions/cache@v5
         with:
-          path: ~/.konan
-          key: konan-${{ runner.os }}-${{ env.KOTLIN_VERSION }}
+          path: |
+            ${{ env.AMPER_CACHE_ROOT }}/.m2.cache
+            ${{ env.AMPER_CACHE_ROOT }}/kotlin
+          enableCrossOsArchive: true
+          key: amper-shared-dependencies-${{ hashFiles('project.yaml', '**/module.yaml', '**/plugin.yaml', 'amper', 'amper.bat', 'libs.versions.toml') }}
           restore-keys: |
-            konan-${{ runner.os }}-
+            amper-shared-dependencies-
 
       - name: 🗂️ Cache build outputs
         uses: actions/cache@v5
@@ -77,10 +84,28 @@ jobs:
           restore-keys: |
             amper-project-${{ runner.os }}-
 
-      - name: 🏗️ Build release
+      - name: 🅺 Extract Kotlin version
+        if: env.AMPER_TASK == 'build'
         run: |
-          ./amper build -v release
-          ./build/tasks/_macos_linkMacosArm64Release/macos.kexe
+          echo "KOTLIN_VERSION=$(grep '^kotlin ' libs.versions.toml | sed 's/.*= *"\(.*\)"/\1/')" >> $GITHUB_ENV
+
+      - name: ⚙️ Cache Kotlin/Native konan toolchains
+        if: env.AMPER_TASK == 'build'
+        uses: actions/cache@v5
+        with:
+          path: ~/.konan
+          key: konan-${{ runner.os }}-${{ env.KOTLIN_VERSION }}
+          restore-keys: |
+            konan-${{ runner.os }}-
+
+      - name: 🏗️ Build
+        run: |
+          if [ "$AMPER_TASK" = "build" ]; then
+            ./amper build -v release
+            ./build/tasks/_macos_linkMacosArm64Release/macos.kexe
+          else
+            ./amper package
+          fi
 
       - name: ☕ Upload app-jvm
         uses: actions/upload-artifact@v7
@@ -91,6 +116,7 @@ jobs:
           if-no-files-found: error
 
       - name: 🐧 Upload linux-x64
+        if: env.AMPER_TASK == 'build'
         uses: actions/upload-artifact@v7
         with:
           name: app-linux-x64.zip
@@ -98,6 +124,7 @@ jobs:
           if-no-files-found: error
 
       - name: 🐧 Upload linux-arm64
+        if: env.AMPER_TASK == 'build'
         uses: actions/upload-artifact@v7
         with:
           name: app-linux-arm64.zip
@@ -105,6 +132,7 @@ jobs:
           if-no-files-found: error
 
       - name: 🍎 Upload macos-arm64
+        if: env.AMPER_TASK == 'build'
         uses: actions/upload-artifact@v7
         with:
           name: app-macos-arm64.zip
@@ -112,6 +140,7 @@ jobs:
           if-no-files-found: error
 
       - name: 🪟 Upload windows-x64
+        if: env.AMPER_TASK == 'build'
         uses: actions/upload-artifact@v7
         with:
           name: app-windows-x64.zip
