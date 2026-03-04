@@ -1,4 +1,4 @@
-name: 🏗️ Amper Build
+name: 🔨 Build & Release
 
 on:
   push:
@@ -27,23 +27,23 @@ env:
 
 jobs:
   build:
-    name: 🧪 Amper Build
+    name: 🔨 Build
     runs-on: macos-latest
 
     steps:
-      - name: 🛎️ Check out the source code
+      - name: 📥 Checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           submodules: recursive
 
-      - name: 📦 Cache Amper binaries
+      - name: ⚡ Cache Amper bootstrap
         uses: actions/cache@v5
         with:
           path: ${{ env.AMPER_BOOTSTRAP_CACHE_DIR }}
           key: amper-boot-${{ runner.os }}-${{ hashFiles('amper', 'amper.bat') }}
 
-      - name: 🗄️ Cache dependencies
+      - name: 📦 Cache dependencies
         uses: actions/cache@v5
         with:
           path: |
@@ -53,7 +53,7 @@ jobs:
           restore-keys: |
             amper-shared-deps-
 
-      - name: ⬇️ Cache downloads (toolchains & JDKs)
+      - name: 🛠️ Cache toolchains & JDKs
         uses: actions/cache@v5
         with:
           path: |
@@ -63,7 +63,7 @@ jobs:
           restore-keys: |
             amper-shared-downloads-${{ runner.os }}-
 
-      - name: ⚡ Cache incremental build outputs
+      - name: 🗂️ Cache build outputs
         uses: actions/cache@v5
         with:
           path: |
@@ -73,15 +73,49 @@ jobs:
           restore-keys: |
             amper-project-${{ runner.os }}-
 
-      - name: 🚀 Run package
-        id: amper-test
-        run: ./amper package
+      - name: 🏗️ Build release
+        id: amper-build
+        run: |
+          ./amper build -v release
+          ./build/tasks/_macos_linkMacosArm64Release/macos.kexe
 
-      - name: 📤 Upload build artifacts
-        if: steps.amper-test.outcome == 'success'
+      - name: ☕ Upload app-jvm
+        if: steps.amper-build.outcome == 'success'
         uses: actions/upload-artifact@v7
         with:
           name: app-jvm.jar
-          path: |
-            build/tasks/_app_jarJvm/app-jvm.jar
+          path: build/tasks/_app_jarJvm/app-jvm.jar
+          archive: false
+          if-no-files-found: error
+
+      - name: 🐧 Upload linux-x64
+        if: steps.amper-build.outcome == 'success'
+        uses: actions/upload-artifact@v7
+        with:
+          name: app-linux-x64.zip
+          path: build/tasks/_linux_linkLinuxX64Release/linux.kexe
+          if-no-files-found: error
+
+      - name: 🐧 Upload linux-arm64
+        if: steps.amper-build.outcome == 'success'
+        uses: actions/upload-artifact@v7
+        with:
+          name: app-linux-arm64.zip
+          path: build/tasks/_linux_linkLinuxArm64Release/linux.kexe
+          if-no-files-found: error
+
+      - name: 🍎 Upload macos-arm64
+        if: steps.amper-build.outcome == 'success'
+        uses: actions/upload-artifact@v7
+        with:
+          name: app-macos-arm64.zip
+          path: build/tasks/_macos_linkMacosArm64Release/macos.kexe
+          if-no-files-found: error
+
+      - name: 🪟 Upload windows-x64
+        if: steps.amper-build.outcome == 'success'
+        uses: actions/upload-artifact@v7
+        with:
+          name: app-windows-x64.zip
+          path: build/tasks/_windows_linkMingwX64Release/windows.exe
           if-no-files-found: error

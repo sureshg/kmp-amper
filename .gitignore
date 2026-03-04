@@ -27,3 +27,4 @@ build/
 CLAUDE.local.md
 .codex/
 .cursor/
+.env
