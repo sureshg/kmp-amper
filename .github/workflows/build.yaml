@@ -43,15 +43,17 @@ jobs:
           path: ${{ env.AMPER_BOOTSTRAP_CACHE_DIR }}
           key: amper-boot-${{ runner.os }}-${{ hashFiles('amper', 'amper.bat') }}
 
-      - name: 🛠️ Cache toolchains & JDKs
+      - name: 🛠️ Cache toolchains, JDKs & dependencies
         uses: actions/cache@v5
         with:
           path: |
             ${{ env.AMPER_CACHE_ROOT }}/download.cache
             ${{ env.AMPER_CACHE_ROOT }}/extract.cache
-          key: amper-shared-downloads-${{ runner.os }}-${{ hashFiles('project.yaml', '**/module.yaml', '**/plugin.yaml', 'amper', 'amper.bat', 'libs.versions.toml') }}
+            ${{ env.AMPER_CACHE_ROOT }}/.m2.cache
+            ${{ env.AMPER_CACHE_ROOT }}/kotlin
+          key: amper-shared-${{ runner.os }}-${{ hashFiles('project.yaml', '**/module.yaml', '**/plugin.yaml', 'amper', 'amper.bat', 'libs.versions.toml') }}
           restore-keys: |
-            amper-shared-downloads-${{ runner.os }}-
+            amper-shared-${{ runner.os }}-
 
       - name: 🅺 Extract Kotlin version
         run: |
@@ -65,16 +67,6 @@ jobs:
           restore-keys: |
             konan-${{ runner.os }}-
 
-      - name: 📦 Cache dependencies
-        uses: actions/cache@v5
-        with:
-          path: |
-            ${{ env.AMPER_CACHE_ROOT }}/.m2.cache
-            ${{ env.AMPER_CACHE_ROOT }}/kotlin
-          key: amper-shared-deps-${{ hashFiles('project.yaml', '**/module.yaml', '**/plugin.yaml', 'amper', 'amper.bat', 'libs.versions.toml') }}
-          restore-keys: |
-            amper-shared-deps-
-
       - name: 🗂️ Cache build outputs
         uses: actions/cache@v5
         with:
@@ -86,13 +78,11 @@ jobs:
             amper-project-${{ runner.os }}-
 
       - name: 🏗️ Build release
-        id: amper-build
         run: |
           ./amper build -v release
           ./build/tasks/_macos_linkMacosArm64Release/macos.kexe
 
       - name: ☕ Upload app-jvm
-        if: steps.amper-build.outcome == 'success'
         uses: actions/upload-artifact@v7
         with:
           name: app-jvm.jar
@@ -101,7 +91,6 @@ jobs:
           if-no-files-found: error
 
       - name: 🐧 Upload linux-x64
-        if: steps.amper-build.outcome == 'success'
         uses: actions/upload-artifact@v7
         with:
           name: app-linux-x64.zip
@@ -109,7 +98,6 @@ jobs:
           if-no-files-found: error
 
       - name: 🐧 Upload linux-arm64
-        if: steps.amper-build.outcome == 'success'
         uses: actions/upload-artifact@v7
         with:
           name: app-linux-arm64.zip
@@ -117,7 +105,6 @@ jobs:
           if-no-files-found: error
 
       - name: 🍎 Upload macos-arm64
-        if: steps.amper-build.outcome == 'success'
         uses: actions/upload-artifact@v7
         with:
           name: app-macos-arm64.zip
@@ -125,7 +112,6 @@ jobs:
           if-no-files-found: error
 
       - name: 🪟 Upload windows-x64
-        if: steps.amper-build.outcome == 'success'
         uses: actions/upload-artifact@v7
         with:
           name: app-windows-x64.zip
