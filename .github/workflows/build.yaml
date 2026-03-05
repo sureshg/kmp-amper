@@ -107,6 +107,15 @@ jobs:
             ./amper package
           fi
 
+      - name: 🔭 Upload OpenTelemetry traces
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: amper_cli_traces.jsonl
+          path: build/logs/amper_*_${{ env.AMPER_TASK }}/telemetry/amper_cli_traces.jsonl
+          archive: false
+          if-no-files-found: ignore
+
       - name: ☕ Upload app-jvm
         uses: actions/upload-artifact@v7
         with:
