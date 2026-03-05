@@ -32,7 +32,7 @@ concurrency:
 
 env:
   AMPER_BOOTSTRAP_CACHE_DIR: ${{ github.workspace }}/.amper/boot-cache
-  AMPER_CACHE_ROOT: ${{ github.workspace }}/.amper/shared-cache
+  AMPER_SHARED_CACHE_DIR: ${{ github.workspace }}/.amper/shared-cache
   AMPER_TASK: ${{ inputs.task || 'package' }}
 
 jobs:
@@ -57,8 +57,8 @@ jobs:
         uses: actions/cache@v5
         with:
           path: |
-            ${{ env.AMPER_CACHE_ROOT }}/download.cache
-            ${{ env.AMPER_CACHE_ROOT }}/extract.cache
+            ${{ env.AMPER_SHARED_CACHE_DIR }}/download.cache
+            ${{ env.AMPER_SHARED_CACHE_DIR }}/extract.cache
           key: amper-shared-downloads-${{ runner.os }}-${{ hashFiles('project.yaml', '**/module.yaml', '**/plugin.yaml', 'amper', 'amper.bat', 'libs.versions.toml') }}
           restore-keys: |
             amper-shared-downloads-${{ runner.os }}-
@@ -67,8 +67,8 @@ jobs:
         uses: actions/cache@v5
         with:
           path: |
-            ${{ env.AMPER_CACHE_ROOT }}/.m2.cache
-            ${{ env.AMPER_CACHE_ROOT }}/kotlin
+            ${{ env.AMPER_SHARED_CACHE_DIR }}/.m2.cache
+            ${{ env.AMPER_SHARED_CACHE_DIR }}/kotlin
           enableCrossOsArchive: true
           key: amper-shared-dependencies-${{ hashFiles('project.yaml', '**/module.yaml', '**/plugin.yaml', 'amper', 'amper.bat', 'libs.versions.toml') }}
           restore-keys: |
