@@ -30,7 +30,7 @@ settings:
     # extraEnvironment
 
   kotlin:
-    version: 2.3.20-RC2
+    version: 2.3.20-RC3
     languageVersion: 2.3
     apiVersion: 2.3
     progressiveMode: true
