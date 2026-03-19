@@ -47,6 +47,7 @@ settings:
       - -Xannotation-default-target=param-property
       - -Xexplicit-backing-fields
       - -Xconsistent-data-class-copy-visibility
+      - -Xname-based-destructuring=complete
     # - -Xannotation-target-all
     # - -Xskip-prerelease-check
     # - -Xsuppress-warning=CAN_BE_VAL
