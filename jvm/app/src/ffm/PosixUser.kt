@@ -74,7 +74,7 @@ object PosixUser {
       val gs = arena.allocate(C_INT, groupNum.toLong())
       groupNum = mhGetgroups.invokeExact(capturedState, groupNum, gs) as Int
       if (groupNum == -1)
-          error("getgroups returns $groupNum. Reason: ${strerror(errno(capturedState))}")
+          error("getgroups returns $groupNum. Reason: ${strerror(capturedState.errno)}")
 
       groups = List(groupNum) { gs.getAtIndex(C_INT, it.toLong()).toUInt().toLong() }
 
@@ -92,8 +92,7 @@ object PosixUser {
 
       when {
         out != 0 -> error(strerror(out))
-        result.get(ValueLayout.ADDRESS, 0) == NULL ->
-            error("the requested entry is not found")
+        result.get(ValueLayout.ADDRESS, 0) == NULL -> error("the requested entry is not found")
         else -> {
           uid = (vhPwUid.get(pwd, 0L) as Int).toUInt().toLong()
           gid = (vhPwGid.get(pwd, 0L) as Int).toUInt().toLong()

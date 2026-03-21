@@ -53,14 +53,16 @@ private val MH_STRERROR: MethodHandle by lazy {
   )
 }
 
-/** Returns the error message for the given [errno] value. */
+/** POSIX `strerror` — human-readable message for the given [errno] value. */
 fun strerror(errno: Int): String {
   val errMsg = MH_STRERROR.invokeExact(errno) as MemorySegment
   return errMsg.reinterpret(Long.MAX_VALUE).getString(0)
 }
 
-/** Extracts the errno value from a [capturedState] segment. */
-fun errno(capturedState: MemorySegment): Int = VH_ERRNO.get(capturedState, 0L) as Int
+/** Errno value from a captured call-state segment (read/write). */
+var MemorySegment.errno: Int
+  get() = VH_ERRNO.get(this, 0L) as Int
+  set(value) { VH_ERRNO.set(this, 0L, value) }
 
 /** Creates a downcall handle for the native [symbol] with the given [descriptor]. */
 fun downcallHandle(
