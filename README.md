@@ -74,10 +74,7 @@ Build a native executable for the Ktor application using the `native-image` Ampe
 # Install GraalVM CE (via SDKMAN)
 $ sdk i java 25.0.2-graalce
 
-# Generate reachability metadata (one-time, run the app and exercise its endpoints, then stop)
-$ ./amper task :ktor:runTracingAgent@native-image
-
-# Build the native image (output: build/tasks/_ktor_buildNativeImage@native-image/ktor)
+# Build the native image
 $ ./amper task :ktor:buildNativeImage@native-image
 
 # Run the native image
