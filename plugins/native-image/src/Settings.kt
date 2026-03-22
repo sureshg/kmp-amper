@@ -1,7 +1,7 @@
 import org.jetbrains.amper.plugins.Configurable
 
 @Configurable
-interface Schema {
+interface Settings {
   val version: String
     get() = "25"
 

@@ -7,4 +7,4 @@ dependencies:
   - $libs.ktor.client.cio: runtime-only
 
 pluginInfo:
-  settingsClass: Schema
+  settingsClass: Settings
