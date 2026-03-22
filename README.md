@@ -66,6 +66,24 @@ $ log stream --info --style syslog --predicate 'senderImagePath ENDSWITH "macos.
 $ log show --info --style syslog --predicate 'senderImagePath ENDSWITH "macos.kexe"' --last 5m
 ```
 
+### GraalVM Native Image
+
+Build a native executable for the Ktor application using the `native-image` Amper plugin.
+
+```bash
+# Install GraalVM CE (via SDKMAN)
+$ sdk i java 25.0.2-graalce
+
+# Generate reachability metadata (one-time, run the app and exercise its endpoints, then stop)
+$ ./amper task :ktor:runTracingAgent@native-image
+
+# Build the native image (output: build/tasks/_ktor_buildNativeImage@native-image/ktor)
+$ ./amper task :ktor:buildNativeImage@native-image
+
+# Run the native image
+$ ./build/tasks/_ktor_buildNativeImage@native-image/ktor
+```
+
 ### Self-Contained Binaries
 
 Package Amper executable JARs with [jbundle](https://github.com/avelino/jbundle) to create optimized self-contained

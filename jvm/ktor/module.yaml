@@ -25,3 +25,17 @@ dependencies:
 
 test-dependencies:
   - $libs.ktor.server.test.host
+
+plugins:
+  native-image:
+    enabled: true
+    mainClass: AppKt
+    additionalArgs:
+      - --enable-preview
+      - --enable-native-access=ALL-UNNAMED
+      - --enable-https
+      - --enable-monitoring=jvmstat,threaddump
+      - --future-defaults=all
+      - -H:+UnlockExperimentalVMOptions
+      - -O3
+      - -march=native

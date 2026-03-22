@@ -1,0 +1,13 @@
+tasks:
+  buildNativeImage:
+    action: !buildNativeImage
+      classpath: ${module.runtimeClasspath}
+      mainClass: ${pluginSettings.mainClass}
+      output: ${taskOutputDir}/${module.name}
+      additionalArgs: ${pluginSettings.additionalArgs}
+
+  runTracingAgent:
+    action: !runTracingAgent
+      resources: ${module.resources}
+      classpath: ${module.runtimeClasspath}
+      mainClass: ${pluginSettings.mainClass}

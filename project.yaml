@@ -7,6 +7,7 @@ modules:
   - native/macos
   - native/windows
   - plugins/build-config
+  - plugins/native-image
 # - web/js
 # - web/wasm
 # - web/wasi
@@ -14,3 +15,4 @@ modules:
 
 plugins:
   - ./plugins/build-config
+  - ./plugins/native-image
