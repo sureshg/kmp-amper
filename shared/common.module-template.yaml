@@ -128,6 +128,8 @@ settings@jvm:
 settings@native:
   kotlin:
     debug: false
+    freeCompilerArgs:
+      - -Xbinary=preCodegenInlineThreshold=40
     optIns:
       - kotlinx.cinterop.ExperimentalForeignApi
       - kotlin.experimental.ExperimentalNativeApi
