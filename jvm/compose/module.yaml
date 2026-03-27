@@ -20,3 +20,4 @@ dependencies:
   - ../../shared
   - $libs.slf4j.simple
   - $compose.desktop.currentOs
+# - $libs.compose2pdf
