@@ -12,7 +12,7 @@ data object Empty : Tree<Nothing>
 enum class Order {
   PRE,
   IN,
-  POST
+  POST,
 }
 
 fun <T> Tree<T>.dfs(order: Order = IN): List<T> =

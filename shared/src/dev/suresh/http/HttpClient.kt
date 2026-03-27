@@ -8,9 +8,8 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.cookies.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.plugins.resources.*
-import io.ktor.client.plugins.sse.SSE
-import io.ktor.client.plugins.websocket.WebSockets
-import io.ktor.client.plugins.websocket.pingInterval
+import io.ktor.client.plugins.sse.*
+import io.ktor.client.plugins.websocket.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.util.*
@@ -95,6 +94,11 @@ fun defaultHttpClientConfig(
     format = OkHttp
     sanitizeHeader { header -> header == HttpHeaders.Authorization }
     // filter { it.url.host.contains("localhost").not() }
+  }
+
+  install(CurlLogging) {
+    logger = httpLogger
+    sanitizedHeaders = setOf(HttpHeaders.Authorization)
   }
 
   engine {

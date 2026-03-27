@@ -1,7 +1,7 @@
 package dev.suresh.rpc
 
-import kotlinx.coroutines.flow.*
-import kotlinx.rpc.annotations.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.rpc.annotations.Rpc
 
 @Rpc
 interface MyService {

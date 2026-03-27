@@ -1,11 +1,14 @@
 package dev.suresh.serde
 
-import kotlin.reflect.*
-import kotlin.time.*
-import kotlin.uuid.Uuid
-import kotlinx.serialization.*
+import kotlinx.serialization.InternalSerializationApi
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.*
 import kotlinx.serialization.json.*
+import kotlinx.serialization.serializerOrNull
+import kotlin.reflect.KClass
+import kotlin.time.Duration
+import kotlin.time.Instant
+import kotlin.uuid.Uuid
 
 val BUILTIN_SERIALIZERS: Map<KClass<*>, KSerializer<*>> by lazy {
   mapOf(
@@ -38,7 +41,8 @@ val BUILTIN_SERIALIZERS: Map<KClass<*>, KSerializer<*>> by lazy {
       Nothing::class to NothingSerializer(),
       Duration::class to Duration.serializer(),
       Instant::class to Instant.serializer(),
-      Uuid::class to Uuid.serializer())
+      Uuid::class to Uuid.serializer(),
+  )
 }
 
 fun KClass<*>?.builtinSerializerOrNull() = BUILTIN_SERIALIZERS[this]

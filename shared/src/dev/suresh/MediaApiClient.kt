@@ -1,7 +1,9 @@
 package dev.suresh
 
-import dev.suresh.http.*
-import io.github.oshai.kotlinlogging.*
+import dev.suresh.http.Retry
+import dev.suresh.http.Timeout
+import dev.suresh.http.httpClient
+import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.resources.*
