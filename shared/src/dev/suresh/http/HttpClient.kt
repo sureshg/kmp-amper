@@ -45,14 +45,14 @@ expect fun httpClient(
     timeout: Timeout = DEFAULT,
     retry: Retry = DEFAULT,
     httpLogger: KLogger,
-    config: HttpClientConfigurer = defaultHttpClientConfig(name, timeout, retry, httpLogger)
+    config: HttpClientConfigurer = defaultHttpClientConfig(name, timeout, retry, httpLogger),
 ): HttpClient
 
 fun defaultHttpClientConfig(
     name: String,
     timeout: Timeout,
     retry: Retry,
-    httpLogger: KLogger
+    httpLogger: KLogger,
 ): HttpClientConfigurer = {
   install(Resources)
   install(ContentNegotiation) { json(json) }
@@ -96,11 +96,6 @@ fun defaultHttpClientConfig(
     // filter { it.url.host.contains("localhost").not() }
   }
 
-  install(CurlLogging) {
-    logger = httpLogger
-    sanitizedHeaders = setOf(HttpHeaders.Authorization)
-  }
-
   engine {
     pipelining = true
     // proxy  = ProxyBuilder.http()
@@ -112,7 +107,9 @@ fun defaultHttpClientConfig(
 
   install(DefaultRequest) {
     headers.appendIfNameAndValueAbsent(
-        HttpHeaders.ContentType, ContentType.Application.Json.toString())
+        HttpHeaders.ContentType,
+        ContentType.Application.Json.toString(),
+    )
   }
 
   install(SSE) {
@@ -123,6 +120,11 @@ fun defaultHttpClientConfig(
   install(WebSockets) { pingInterval = timeout.read }
 
   expectSuccess = true
+
+  install(CurlLogging) {
+    logger = httpLogger
+    sanitizedHeaders = setOf(HttpHeaders.Authorization)
+  }
 
   // install(SaveBodyPlugin) {
   //   disabled = true

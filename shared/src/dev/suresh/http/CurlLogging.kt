@@ -22,7 +22,7 @@ val CurlLogging =
 
       onRequest { request, _ ->
         when {
-          enabled.load() && logger?.isDebugEnabled() == true ->
+          enabled.load() && logger?.isTraceEnabled() == true ->
               logger.debug { buildCurlCommand(request, sanitized) }
         }
       }
@@ -35,16 +35,18 @@ private fun buildCurlCommand(request: HttpRequestBuilder, sanitized: Set<String>
       val method = request.method.value
       if (method != "GET") append(" -X $method")
 
-      // Merge request headers with content-type from body if present
+      val contentType = (request.body as? OutgoingContent)?.contentType
       val headers = headers {
         appendAll(request.headers)
-        (request.body as? OutgoingContent)?.contentType?.let {
-          appendIfNameAbsent(HttpHeaders.ContentType, it.toString())
-        }
+        contentType?.let { appendIfNameAbsent(HttpHeaders.ContentType, it.toString()) }
       }
 
       headers.forEach { name, values ->
-        val value = if (name.lowercase() in sanitized) "***" else values.joinToString(", ")
+        val value =
+            when {
+              name.lowercase() in sanitized -> "***"
+              else -> values.joinToString(", ")
+            }
         append(" -H '$name: $value'")
       }
 
@@ -54,7 +56,6 @@ private fun buildCurlCommand(request: HttpRequestBuilder, sanitized: Set<String>
       when (val body = request.body) {
         is TextContent -> append(" -d '${body.text}'")
         is ByteArrayContent -> append(" -d '${body.bytes().decodeToString()}'")
-        else -> {}
       }
 
       // Compressed flag

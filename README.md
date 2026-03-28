@@ -61,9 +61,8 @@ $ docker run --rm --platform="linux/amd64" \
              -v "$PWD":/work \
              scottyhardy/docker-wine:latest wine /work/build/tasks/_windows_linkMingwX64Release/windows.exe
 
-# Show MacOS logs
-$ log stream --info --style syslog --predicate 'senderImagePath ENDSWITH "macos.kexe"'
-$ log show --info --style syslog --predicate 'senderImagePath ENDSWITH "macos.kexe"' --last 5m
+# Show MacOS logs (debug)
+$ log stream --debug --predicate "process == 'macos.kexe' AND senderImagePath ENDSWITH 'macos.kexe'"
 ```
 
 ### GraalVM Native Image
