@@ -4,7 +4,8 @@ import io.github.oshai.kotlinlogging.KLogger
 import io.ktor.client.plugins.api.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import io.ktor.http.content.*
+import io.ktor.http.content.OutgoingContent
+import io.ktor.http.content.TextContent
 import io.ktor.util.*
 import kotlin.concurrent.atomics.AtomicBoolean
 
