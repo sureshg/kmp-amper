@@ -7,6 +7,7 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.resources.*
+import io.ktor.client.request.*
 import io.ktor.resources.*
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonIgnoreUnknownKeys
@@ -64,6 +65,10 @@ data class MediaApiClient(val timeout: Timeout = DEFAULT, val retry: Retry = DEF
   suspend fun images() = client.get(ImgRes()).body<List<Image>>()
 
   suspend fun videos() = client.get(VideoRes()).body<List<Video>>()
+
+  suspend fun addVideo(video: Video) = client.post(VideoRes()) { setBody(video) }
+
+  suspend fun updateVideo(video: Video) = client.put(VideoRes()) { setBody(video) }
 
   override fun close() = client.close()
 }

@@ -20,48 +20,51 @@ val CurlLogging =
       val sanitized = pluginConfig.sanitizedHeaders.map { it.lowercase() }.toSet()
       val enabled = pluginConfig.enabled
 
-      onRequest { request, _ ->
+      on(SendingRequest) { request, content ->
         when {
-          enabled.load() && logger?.isTraceEnabled() == true ->
-              logger.debug { buildCurlCommand(request, sanitized) }
+          enabled.load() && logger?.isDebugEnabled() == true ->
+              logger.debug { toCurl(request, content, sanitized) }
         }
       }
     }
 
-private fun buildCurlCommand(request: HttpRequestBuilder, sanitized: Set<String>): String =
-    buildString {
-      append("curl")
+private fun toCurl(
+    request: HttpRequestBuilder,
+    content: OutgoingContent,
+    sanitized: Set<String>,
+): String = buildString {
+  append("curl")
 
-      val method = request.method.value
-      if (method != "GET") append(" -X $method")
+  val method = request.method.value
+  if (method != "GET") append(" -X $method")
 
-      val contentType = (request.body as? OutgoingContent)?.contentType
-      val headers = headers {
-        appendAll(request.headers)
-        contentType?.let { appendIfNameAbsent(HttpHeaders.ContentType, it.toString()) }
-      }
+  val headers = headers {
+    appendAll(request.headers)
+    content.contentType?.let { appendIfNameAbsent(HttpHeaders.ContentType, it.toString()) }
+  }
 
-      headers.forEach { name, values ->
-        val value =
-            when {
-              name.lowercase() in sanitized -> "***"
-              else -> values.joinToString(", ")
-            }
-        append(" -H '$name: $value'")
-      }
+  headers.forEach { name, values ->
+    val value =
+        when {
+          name.lowercase() in sanitized -> "***"
+          else -> values.joinToString(", ")
+        }
+    append(" -H '$name: $value'")
+  }
 
-      // Body — only in-memory content (TextContent, ByteArrayContent) is included.
-      // Streaming bodies (WriteChannelContent, ReadChannelContent) are intentionally
-      // skipped to avoid consuming the one-shot stream and breaking the actual request.
-      when (val body = request.body) {
-        is TextContent -> append(" -d '${body.text}'")
-        is ByteArrayContent -> append(" -d '${body.bytes().decodeToString()}'")
-      }
+  // Body — only in-memory content (TextContent, ByteArrayContent) is included.
+  // Streaming bodies (WriteChannelContent, ReadChannelContent) are intentionally
+  // skipped to avoid consuming the one-shot stream and breaking the actual request.
+  when (content) {
+    is TextContent -> append(" -d '${content.text}'")
+    is ByteArrayContent -> append(" -d '${content.bytes().decodeToString()}'")
+    else -> Unit
+  }
 
-      // Compressed flag
-      if (request.headers.contains(HttpHeaders.AcceptEncoding)) {
-        append(" --compressed")
-      }
+  // Compressed flag
+  if (request.headers.contains(HttpHeaders.AcceptEncoding)) {
+    append(" --compressed")
+  }
 
-      append(" '${request.url.buildString()}'")
-    }
+  append(" '${request.url.buildString()}'")
+}
