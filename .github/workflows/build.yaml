@@ -1,4 +1,4 @@
-name: 🔨 Build & Release
+name: CI
 
 on:
   push:
@@ -37,7 +37,7 @@ env:
 
 jobs:
   build:
-    name: 🔨 Build
+    name: 🔨 Build & Release
     runs-on: macos-latest
 
     steps:

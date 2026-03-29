@@ -3,8 +3,11 @@ product: jvm/amper-plugin
 # repositories:
 #  - https://packages.jetbrains.team/maven/p/amper/amper
 
+description: Native Image plugin for Amper
+
 dependencies:
   - $libs.ktor.client.cio: runtime-only
 
 pluginInfo:
+  id: native-image
   settingsClass: Settings

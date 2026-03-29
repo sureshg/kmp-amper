@@ -74,6 +74,7 @@ Build a native executable for the Ktor application using the `native-image` Ampe
 $ sdk i java 25.0.2-graalce
 
 # Build the native image
+$ ./amper check -m ktor graalVMCheck
 $ ./amper task :ktor:buildNativeImage@native-image
 
 # Run the native image

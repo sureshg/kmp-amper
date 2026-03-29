@@ -11,3 +11,11 @@ tasks:
       resources: ${module.resources}
       classpath: ${module.runtimeClasspath}
       mainClass: ${pluginSettings.mainClass}
+
+  graalVMCheck:
+    action: !graalVMCheck
+      moduleName: ${module.name}
+
+checks:
+  - performedBy: graalVMCheck
+    name: graalVMCheck

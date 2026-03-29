@@ -1,10 +1,25 @@
-import org.jetbrains.amper.plugins.*
 import java.io.File
 import java.nio.file.Path
 import kotlin.io.path.createDirectories
 import kotlin.io.path.createParentDirectories
 import kotlin.io.path.div
 import kotlin.io.path.exists
+import org.jetbrains.amper.plugins.*
+
+fun graalBin(): Path {
+  val javaHome =
+      requireNotNull(System.getenv("JAVA_HOME")) {
+        "JAVA_HOME environment variable is not set. Set it to a GraalVM distribution."
+      }
+  val bin = Path.of(javaHome) / "bin"
+  require((bin / nativeImageExecutableName()).exists()) {
+    "native-image not found in $bin. Ensure JAVA_HOME points to a GraalVM distribution."
+  }
+  require((bin / javaExecutableName()).exists()) {
+    "java not found in $bin. Ensure JAVA_HOME points to a GraalVM distribution."
+  }
+  return bin
+}
 
 @TaskAction
 fun buildNativeImage(
@@ -13,15 +28,7 @@ fun buildNativeImage(
     additionalArgs: List<String> = emptyList(),
     @Output output: Path,
 ) {
-  val javaHome = System.getenv("JAVA_HOME")
-  requireNotNull(javaHome) {
-    "JAVA_HOME environment variable is not set. Set it to a GraalVM distribution."
-  }
-
-  val nativeImageExe = Path.of(javaHome) / "bin" / nativeImageExecutableName()
-  require(nativeImageExe.exists()) {
-    "native-image executable not found at $nativeImageExe. Ensure JAVA_HOME points to a GraalVM distribution."
-  }
+  val nativeImageExe = graalBin() / nativeImageExecutableName()
 
   output.createParentDirectories()
 
@@ -48,15 +55,7 @@ fun runTracingAgent(
     mainClass: String,
     @Output resources: ModuleSources,
 ) {
-  val javaHome = System.getenv("JAVA_HOME")
-  requireNotNull(javaHome) {
-    "JAVA_HOME environment variable is not set. Set it to a GraalVM distribution."
-  }
-
-  val javaExe = Path.of(javaHome) / "bin" / javaExecutableName()
-  require(javaExe.exists()) {
-    "java executable not found at $javaExe. Ensure JAVA_HOME points to a GraalVM distribution."
-  }
+  val javaExe = graalBin() / javaExecutableName()
 
   val outputDir = resources.sourceDirectories.first() / "META-INF/native-image/"
   outputDir.createDirectories()
@@ -73,4 +72,9 @@ fun runTracingAgent(
 
   val exitCode = process.waitFor()
   require(exitCode == 0) { "Tracing agent failed with exit code $exitCode" }
+}
+
+@TaskAction
+fun graalVMCheck(moduleName: String) {
+  graalBin()
 }
