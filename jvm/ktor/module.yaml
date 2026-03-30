@@ -15,7 +15,7 @@ dependencies:
   - ../../shared
   - $libs.ktor.server.core
   - $libs.ktor.server.di
-  - $libs.ktor.server.jetty.jakarta
+  - $libs.ktor.server.netty
   - $libs.ktor.server.swagger
   - $libs.ktor.server.routing.openapi
   - $libs.logback.classic
