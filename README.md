@@ -43,26 +43,59 @@ $ find . \( -path "*/build/*" -perm +111 -o -path "*/build/tasks/*executableJar*
 
 ```
 
-### Running Binaries
+### Run Binaries
+
+#### ☕ JVM
 
 ```bash
-# Run on JVM
 $ java --enable-preview \
        --add-modules=jdk.incubator.vector \
        --enable-native-access=ALL-UNNAMED \
        -jar build/tasks/_app_executableJarJvm/app-jvm-executable.jar
+```
 
-# Run on MacOS
+#### 🍎 macOS
+
+```bash
 $ build/tasks/_macos_linkMacosArm64Release/macos.kexe
 
-# Run on Windows
-$ docker run --rm --platform="linux/amd64" \
-             -e DISPLAY=host.docker.internal:0 \
-             -v "$PWD":/work \
-             scottyhardy/docker-wine:latest wine /work/build/tasks/_windows_linkMingwX64Release/windows.exe
-
-# Show MacOS logs (debug)
+# Debug
 $ log stream --debug --predicate "process == 'macos.kexe' AND senderImagePath ENDSWITH 'macos.kexe'"
+$ otool -L build/tasks/_macos_linkMacosArm64Release/macos.kexe
+```
+
+#### 🐧 Linux
+
+```bash
+# Debian slim (can use ubuntu:latest also)
+$ docker run -it --rm \
+         --platform=linux/amd64 \
+         --pull always \
+         --mount type=bind,source=$(pwd),destination=/app,readonly \
+         debian:stable-slim
+  # apt update && apt install -y ca-certificates libtree
+  # /app/build/tasks/_linux_linkLinuxX64Release/linux.kexe
+  # libtree -v /app/build/tasks/_linux_linkLinuxX64Release/linux.kexe
+
+# Distroless (cc - base + libgcc1)
+$ docker run -it --rm \
+         --platform=linux/amd64 \
+         --pull always \
+         -v "$PWD":/app \
+         --entrypoint=/app/build/tasks/_linux_linkLinuxX64Release/linux.kexe \
+         gcr.io/distroless/cc
+```
+
+#### 🪟 Windows
+
+```bash
+# Wine via Docker
+$ docker run -it --rm \
+         --platform="linux/amd64" \
+         --pull always \
+         -e DISPLAY=host.docker.internal:0 \
+         -v "$PWD":/app \
+         scottyhardy/docker-wine:stable-10.0 wine /app/build/tasks/_windows_linkMingwX64Release/windows.exe
 ```
 
 ### GraalVM Native Image

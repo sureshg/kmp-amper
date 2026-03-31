@@ -30,16 +30,15 @@ settings:
     # extraEnvironment
 
   kotlin:
-    version: 2.3.20
-    languageVersion: 2.3
-    apiVersion: 2.3
+    version: 2.4.0-Beta1
+    languageVersion: 2.4
+    apiVersion: 2.4
     progressiveMode: true
     allWarningsAsErrors: false
     suppressWarnings: false
     verbose: false
     freeCompilerArgs:
       - -Wextra
-      - -Xcontext-parameters
       - -Xexpect-actual-classes
       - -Xreport-all-warnings
       - -Xreturn-value-checker=full
@@ -48,23 +47,22 @@ settings:
       - -Xexplicit-backing-fields
       - -Xconsistent-data-class-copy-visibility
       - -Xname-based-destructuring=complete
-    # - -Xannotation-target-all
-    # - -Xskip-prerelease-check
-    # - -Xsuppress-warning=CAN_BE_VAL
-    compilerPlugins:
-      - id: com.javiersc.kotlin.kopy-compiler
-        dependency: $libs.kopy.compilerPlugin
+      # - -Xannotation-target-all
+      # - -Xskip-prerelease-check
+      # - -Xsuppress-warning=CAN_BE_VAL
 
+      #compilerPlugins:
+      # - id: com.javiersc.kotlin.kopy-compiler
+      #   dependency: $libs.kopy.compilerPlugin
       # - id: io.exoquery.exoquery-plugin
       #   dependency: $libs.exoquery.compilerPlugin
-
-      - id: dev.zacsweers.redacted.compiler
-        dependency: $libs.kotlin.redacted.compilerPlugin
-        options:
-          enabled: true
-          replacementString: "█"
-          redactedAnnotations: dev/zacsweers/redacted/annotations/Redacted
-          unredactedAnnotations: dev/zacsweers/redacted/annotations/Unredacted
+      #- id: dev.zacsweers.redacted.compiler
+      #  dependency: $libs.kotlin.redacted.compilerPlugin
+      #  options:
+      #    enabled: true
+      #    replacementString: "█"
+      #    redactedAnnotations: dev/zacsweers/redacted/annotations/Redacted
+      #    unredactedAnnotations: dev/zacsweers/redacted/annotations/Unredacted
 
     optIns:
       - kotlin.ExperimentalStdlibApi
@@ -128,8 +126,6 @@ settings@jvm:
 settings@native:
   kotlin:
     debug: false
-    freeCompilerArgs:
-      - -Xbinary=preCodegenInlineThreshold=40
     optIns:
       - kotlinx.cinterop.ExperimentalForeignApi
       - kotlin.experimental.ExperimentalNativeApi
