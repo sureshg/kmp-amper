@@ -1,9 +1,13 @@
-import dev.suresh.http.*
-import ffm.*
+import dev.suresh.http.ErrorStatus
+import dev.suresh.http.json
+import ffm.PosixUser
+import ffm.vectorApi
 import genai.voices
-import io.roastedroot.lumis4j.core.*
+import io.roastedroot.lumis4j.core.Lang
+import io.roastedroot.lumis4j.core.Lumis
+import io.roastedroot.lumis4j.core.Theme
 import kotlinx.schema.generator.json.JsonSchemaConfig
-import kotlinx.schema.generator.json.serialization.*
+import kotlinx.schema.generator.json.serialization.SerializationClassJsonSchemaGenerator
 import kotlinx.schema.json.encodeToString
 
 suspend fun main() {

@@ -42,8 +42,8 @@ typealias HttpClientConfigurer = HttpClientConfig<*>.() -> Unit
  */
 expect fun httpClient(
     name: String = "Api Client",
-    timeout: Timeout = DEFAULT,
-    retry: Retry = DEFAULT,
+    timeout: Timeout = Timeout(),
+    retry: Retry = Retry(),
     httpLogger: KLogger,
     config: HttpClientConfigurer = defaultHttpClientConfig(name, timeout, retry, httpLogger),
 ): HttpClient

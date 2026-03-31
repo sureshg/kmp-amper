@@ -1,8 +1,8 @@
 package dev.suresh.http
 
 import io.github.oshai.kotlinlogging.KLogger
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.java.Java
+import io.ktor.client.*
+import io.ktor.client.engine.java.*
 import nl.altindag.ssl.SSLFactory
 
 val customSSLFactory: SSLFactory by lazy {
@@ -14,7 +14,7 @@ actual fun httpClient(
     timeout: Timeout,
     retry: Retry,
     httpLogger: KLogger,
-    config: HttpClientConfigurer
+    config: HttpClientConfigurer,
 ) =
     HttpClient(Java) {
       config(this)

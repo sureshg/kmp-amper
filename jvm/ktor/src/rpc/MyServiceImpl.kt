@@ -1,7 +1,7 @@
 package rpc
 
 import dev.suresh.rpc.MyService
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.flow
 
 data class MyServiceParam(val name: String)
 

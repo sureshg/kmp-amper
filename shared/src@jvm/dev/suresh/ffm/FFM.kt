@@ -62,7 +62,9 @@ fun strerror(errno: Int): String {
 /** Errno value from a captured call-state segment (read/write). */
 var MemorySegment.errno: Int
   get() = VH_ERRNO.get(this, 0L) as Int
-  set(value) { VH_ERRNO.set(this, 0L, value) }
+  set(value) {
+    VH_ERRNO.set(this, 0L, value)
+  }
 
 /** Creates a downcall handle for the native [symbol] with the given [descriptor]. */
 fun downcallHandle(

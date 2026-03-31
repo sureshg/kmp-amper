@@ -4,17 +4,18 @@ import kotlinx.serialization.Serializable
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
-data class Timeout(val connection: Duration, val read: Duration, val write: Duration) {
-  companion object {
-    val DEFAULT = Timeout(connection = 5.seconds, read = 5.seconds, write = 5.seconds)
-  }
-}
+@Serializable
+data class Timeout(
+    val connection: Duration = 5.seconds,
+    val read: Duration = 5.seconds,
+    val write: Duration = 5.seconds,
+)
 
-data class Retry(val attempts: Int, val maxDelay: Duration) {
-  companion object {
-    val DEFAULT = Retry(attempts = 2, maxDelay = 5.seconds)
-  }
-}
+@Serializable
+data class Retry(
+    val attempts: Int = 2,
+    val maxDelay: Duration = 5.seconds,
+)
 
 @Serializable
 data class ErrorStatus(val code: Int, val message: String, val details: String? = null)

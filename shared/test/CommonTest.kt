@@ -12,10 +12,10 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.util.*
+import kotlinx.coroutines.test.runTest
 import kotlin.test.DefaultAsserter.assertEquals
 import kotlin.test.Test
 import kotlin.test.assertTrue
-import kotlinx.coroutines.test.runTest
 
 class CommonTest {
 
@@ -23,7 +23,8 @@ class CommonTest {
   fun platformTest() {
     assertTrue(
         actual = Platform().name().contains("Kotlin"),
-        message = "Platform name should contain 'Kotlin'")
+        message = "Platform name should contain 'Kotlin'",
+    )
   }
 
   @Test
@@ -54,7 +55,9 @@ class CommonTest {
           followRedirects = true
           defaultRequest {
             headers.appendIfNameAndValueAbsent(
-                HttpHeaders.ContentType, ContentType.Application.Json.toString())
+                HttpHeaders.ContentType,
+                ContentType.Application.Json.toString(),
+            )
           }
 
           HttpResponseValidator {
@@ -75,7 +78,8 @@ class CommonTest {
       assertEquals(
           expected = "Client Error Response",
           actual = e.response.bodyAsText(),
-          message = "Check response body")
+          message = "Check response body",
+      )
     }
   }
 }

@@ -36,7 +36,7 @@ data class Video(
     val poster: String? = null,
 )
 
-data class MediaApiClient(val timeout: Timeout = DEFAULT, val retry: Retry = DEFAULT) :
+data class MediaApiClient(val timeout: Timeout = Timeout(), val retry: Retry = Retry()) :
     AutoCloseable {
 
   private val log = KotlinLogging.logger {}

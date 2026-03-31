@@ -1,7 +1,10 @@
 package ffm
 
-import dev.suresh.ffm.*
-import jdk.incubator.vector.*
+import dev.suresh.ffm.plus
+import dev.suresh.ffm.times
+import jdk.incubator.vector.FloatVector
+import jdk.incubator.vector.IntVector
+import jdk.incubator.vector.VectorOperators
 
 val INT_SPECIES = IntVector.SPECIES_PREFERRED
 val FLOAT_SPECIES = FloatVector.SPECIES_PREFERRED

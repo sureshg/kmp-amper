@@ -1,7 +1,12 @@
 package ffm
 
-import dev.suresh.ffm.*
-import java.lang.foreign.*
+import dev.suresh.ffm.C_INT
+import dev.suresh.ffm.C_POINTER
+import dev.suresh.ffm.WCHAR
+import dev.suresh.ffm.downcallHandle
+import java.lang.foreign.Arena
+import java.lang.foreign.FunctionDescriptor
+import java.lang.foreign.MemorySegment
 
 /**
  * Windows user identity information retrieved via FFM calls to kernel32/advapi32.
