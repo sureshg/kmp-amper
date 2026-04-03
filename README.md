@@ -30,12 +30,12 @@ $ ./amper run -m app \
 # Dependency insights
 $ ./amper show dependencies -m app --scope=runtime --filter=org.jetbrains.kotlin:kotlin-stdlib
 
-# Check version updates in amper version catalog
-$ brew install deezer/repo/caupain
-$ caupain -i libs.versions.toml
-
 # Publish to mavenLocal
 $ ./amper publish mavenLocal
+
+# Checks and Custom commands
+$ ./amper check -m ktor [graalVMCheck]
+$ ./amper do graalVMCheck
 
 # List all the binaries
 $ find . \( -path "*/build/*" -type f -perm +111 -o -path "*/build/*executableJar*/*.jar" \) | grep -v -E "(test|debug|dSYM)" | xargs du -h | sort -hr

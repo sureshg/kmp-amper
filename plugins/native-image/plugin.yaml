@@ -19,3 +19,7 @@ tasks:
 checks:
   - performedBy: graalVMCheck
     name: graalVMCheck
+
+commands:
+  - performedBy: graalVMCheck
+    name: graalVMCheck
