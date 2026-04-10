@@ -79,7 +79,7 @@ settings:
       - com.javiersc.kotlin.kopy.KopyOptIn
 
     serialization:
-      version: 1.10.0
+      version: 1.11.0
       format: json
 
     ksp:
