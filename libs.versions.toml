@@ -218,7 +218,7 @@ angus-mail                     = "2.1.0-M1"
 simplemail                     = "8.12.6"
 javelit                        = "0.86.0"
 jwalker                        = "1.1.0"
-hashsmith                      = "0.1.9"
+hashsmith                      = "0.2.0"
 tamboui                        = "0.1.0"
 
 # Compose

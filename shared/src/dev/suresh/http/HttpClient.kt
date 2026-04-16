@@ -30,6 +30,7 @@ val json by lazy {
     allowStructuredMapKeys = true
     allowComments = true
     classDiscriminatorMode = POLYMORPHIC
+    exceptionsWithDebugInfo = true
   }
 }
 
