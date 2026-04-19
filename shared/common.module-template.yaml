@@ -13,6 +13,8 @@ settings:
     enabled: true
     group: dev.suresh.amper
     version: 1.0.0-SNAPSHOT
+    signArtifacts: true
+    publishSources: false
 
   jvm:
     release: 25
