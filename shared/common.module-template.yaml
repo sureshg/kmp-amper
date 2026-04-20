@@ -10,11 +10,11 @@ repositories:
 
 settings:
   publishing:
-    enabled: true
+    enabled: false
     group: dev.suresh.amper
     version: 1.0.0-SNAPSHOT
     signArtifacts: true
-    publishSources: false
+    publishSources: true
 
   jvm:
     release: 25
