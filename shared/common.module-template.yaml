@@ -32,7 +32,7 @@ settings:
     # extraEnvironment
 
   kotlin:
-    version: 2.4.0-Beta1
+    version: 2.4.0-Beta2
     languageVersion: 2.4
     apiVersion: 2.4
     progressiveMode: true
@@ -41,14 +41,14 @@ settings:
     verbose: false
     freeCompilerArgs:
       - -Wextra
+      - -Xcollection-literals
       - -Xexpect-actual-classes
       - -Xreport-all-warnings
       - -Xreturn-value-checker=full
       - -Xcontext-sensitive-resolution
-      - -Xannotation-default-target=param-property
-      - -Xexplicit-backing-fields
       - -Xconsistent-data-class-copy-visibility
       - -Xname-based-destructuring=complete
+      - -Xexplicit-context-arguments
       # - -Xannotation-target-all
       # - -Xskip-prerelease-check
       # - -Xsuppress-warning=CAN_BE_VAL
@@ -85,7 +85,7 @@ settings:
       format: json
 
     ksp:
-      version: 2.3.6
+      version: 2.3.7
 
     rpc:
       enabled: true
