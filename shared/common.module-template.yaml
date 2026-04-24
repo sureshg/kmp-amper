@@ -11,6 +11,7 @@ repositories:
 settings:
   publishing:
     enabled: true
+    # artifactId: shared
     group: dev.suresh.amper
     version: 1.0.0-SNAPSHOT
     signArtifacts: true
