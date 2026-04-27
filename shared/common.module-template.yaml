@@ -25,7 +25,7 @@ settings:
       distributions: [ oracleOpenJdk, zulu ]
       # selectionMode: javaHome
     test:
-      junitPlatformVersion: 6.1.0-M1
+      junitPlatformVersion: 6.1.0-RC1
       freeJvmArgs:
         - --add-modules=jdk.incubator.vector
     #   - --enable-preview
