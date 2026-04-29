@@ -21,9 +21,7 @@ build/
 
 # AI Agents & Tools
 .junie/
-.claude/settings.local.json
-.claude/statsig/
-.claude/todos/
+.claude/
 CLAUDE.local.md
 .codex/
 .cursor/

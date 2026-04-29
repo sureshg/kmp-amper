@@ -1,5 +1,6 @@
 product:
-  type: kmp/lib
+  # type: kmp/lib
+  type: lib
   platforms: [ jvm, linuxArm64, linuxX64, macosArm64, mingwX64 ]
 
 description: |
