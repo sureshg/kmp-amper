@@ -1,0 +1,5 @@
+package = dev.suresh.custom
+---
+static inline const char* getGreeting() {
+  return "Kotlin Native cinterop!";
+}
