@@ -6,6 +6,7 @@ modules:
   - native/linux
   - native/macos
   - native/windows
+# - native/cinterop
   - plugins/build-config
   - plugins/native-image
 # - web/js

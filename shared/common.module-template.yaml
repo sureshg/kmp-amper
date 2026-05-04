@@ -37,6 +37,7 @@ settings:
     languageVersion: 2.4
     apiVersion: 2.4
     progressiveMode: true
+    powerAssert: enabled
     allWarningsAsErrors: false
     suppressWarnings: false
     verbose: false
@@ -53,6 +54,7 @@ settings:
       # - -Xannotation-target-all
       # - -Xskip-prerelease-check
       # - -Xsuppress-warning=CAN_BE_VAL
+      # - -Xwarning-level=UNCHECKED_CAST:error
 
       #compilerPlugins:
       # - id: com.javiersc.kotlin.kopy-compiler
