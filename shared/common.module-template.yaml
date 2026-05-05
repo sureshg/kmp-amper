@@ -3,6 +3,8 @@ repositories:
     url: mavenLocal
     resolve: false
     publish: true
+# - id: kotlin-dev
+#   url: https://packages.jetbrains.team/maven/p/kt/bootstrap
 # - id: mavenCentral
 #   url: https://cache-redirector.jetbrains.com/repo.maven.apache.org/maven2
 # - id: gradle
@@ -61,13 +63,13 @@ settings:
       #   dependency: $libs.kopy.compilerPlugin
       # - id: io.exoquery.exoquery-plugin
       #   dependency: $libs.exoquery.compilerPlugin
-      #- id: dev.zacsweers.redacted.compiler
-      #  dependency: $libs.kotlin.redacted.compilerPlugin
-      #  options:
-      #    enabled: true
-      #    replacementString: "█"
-      #    redactedAnnotations: dev/zacsweers/redacted/annotations/Redacted
-      #    unredactedAnnotations: dev/zacsweers/redacted/annotations/Unredacted
+      # - id: dev.zacsweers.redacted.compiler
+      #   dependency: $libs.kotlin.redacted.compilerPlugin
+      #   options:
+      #     enabled: true
+      #     replacementString: "█"
+      #     redactedAnnotations: dev/zacsweers/redacted/annotations/Redacted
+      #     unredactedAnnotations: dev/zacsweers/redacted/annotations/Unredacted
 
     optIns:
       - kotlin.ExperimentalStdlibApi
