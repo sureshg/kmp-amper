@@ -144,6 +144,8 @@ settings@native:
 
 settings@linux:
   kotlin:
+    # freeCompilerArgs:
+    #   - -Xbinary=sourceInfoType=libbacktrace
     linkerOptions: [
       "-Wl,--as-needed",
       "-Wl,-Bstatic",
