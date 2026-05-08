@@ -9,7 +9,7 @@ repositories:
 # - id: mavenCentral
 #   url: https://repo.maven.apache.org/maven2/
 #
-# - id: mavenCentralSnapshot
+# - id: mavenSnapshot
 #   url: https://central.sonatype.com/repository/maven-snapshots/
 #
 # - id: gradle
@@ -20,16 +20,9 @@ settings:
     release: 25
     storeParameterNames: true
     jdk:
-      version: 25
+      version: 26
       distributions: [ oracleOpenJdk, zulu ]
       # selectionMode: javaHome
-    test:
-      junitPlatformVersion: 6.1.0-RC1
-      freeJvmArgs:
-        - --add-modules=jdk.incubator.vector
-    #   - --enable-preview
-    # systemProperties:
-    # extraEnvironment
 
   kotlin:
     version: 2.4.0-Beta2
@@ -122,7 +115,8 @@ settings@jvm:
     freeCompilerArgs:
       - -Xlint:all
       - --add-modules=jdk.incubator.vector
-    # - --enable-preview
+      - --enable-preview
+      - --release=26
     # annotationProcessing:
     #   processors:
     #     - $libs.google.auto.service
@@ -142,12 +136,18 @@ settings@jvm:
       # - -Xmodule-path=
       # - -Xjavac-arguments="--add-exports java.base/sun.nio.ch=ALL-UNNAMED"
       # - -Xexplicit-api=strict
-
     ksp:
       processors:
         - $libs.ksp.auto.service
 
-  junit: junit-5
+  jvm:
+    test:
+      junitPlatformVersion: 6.1.0-RC1
+      freeJvmArgs:
+        - --add-modules=jdk.incubator.vector
+        - --enable-preview
+    # systemProperties:
+    # extraEnvironment
 
 settings@native:
   kotlin:

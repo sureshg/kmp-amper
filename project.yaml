@@ -2,6 +2,7 @@ modules:
   - shared
   - jvm/app
   - jvm/compose
+  - jvm/data
   - jvm/ktor
   - native/linux
   - native/macos
