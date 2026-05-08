@@ -19,9 +19,9 @@ suspend fun mediaClient() {
       Video(
           description = "The first Blender Open Movie from 2006",
           sources =
-              listOf(
+              [
                   "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-              ),
+              ],
           subtitle = "By Blender Foundation",
           thumb =
               "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
