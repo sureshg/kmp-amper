@@ -144,8 +144,10 @@ settings@jvm:
     test:
       junitPlatformVersion: 6.1.0-RC1
       freeJvmArgs:
-        - --add-modules=jdk.incubator.vector
         - --enable-preview
+        - --enable-native-access=ALL-UNNAMED
+        - --add-modules=jdk.incubator.vector
+        - -Djunit.platform.reporting.open.xml.enabled=true
     # systemProperties:
     # extraEnvironment
 
