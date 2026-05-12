@@ -17,9 +17,9 @@
 setlocal
 
 @rem The version of the Amper distribution to provision and use
-set amper_version=0.11.0-dev-3925
+set amper_version=0.11.0-dev-3930
 @rem Establish chain of trust from here by specifying exact checksum of Amper distribution to be run
-set amper_sha256=608f9bd4438d4f50cedc7554d1c22b82f29539fa84f96c1a6886ffc1269b55a6
+set amper_sha256=9e92b20f1b752dd4be6469ed82c44d26aba74485ea24743ebafc9aa242e02feb
 
 if not defined AMPER_DOWNLOAD_ROOT set AMPER_DOWNLOAD_ROOT=https://packages.jetbrains.team/maven/p/amper/amper
 if not defined AMPER_BOOTSTRAP_CACHE_DIR set AMPER_BOOTSTRAP_CACHE_DIR=%LOCALAPPDATA%\JetBrains\Amper
