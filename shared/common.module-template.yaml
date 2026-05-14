@@ -25,7 +25,7 @@ settings:
       # selectionMode: javaHome
 
   kotlin:
-    version: 2.4.0-Beta2
+    version: 2.4.0-RC
     languageVersion: 2.4
     apiVersion: 2.4
     progressiveMode: true
@@ -80,7 +80,7 @@ settings:
       format: json
 
     ksp:
-      version: 2.3.7
+      version: 2.3.8
 
     rpc:
       enabled: true
@@ -131,7 +131,7 @@ settings@jvm:
       - -Xwhen-expressions=indy
       # - -Xjvm-enable-preview
       # - -Xjvm-expose-boxed
-      # - -Xjdk-release=25
+      # - -Xjdk-release=26
       # - -Xadd-modules=ALL-MODULE-PATH
       # - -Xmodule-path=
       # - -Xjavac-arguments="--add-exports java.base/sun.nio.ch=ALL-UNNAMED"
