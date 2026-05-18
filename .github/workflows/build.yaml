@@ -33,6 +33,7 @@ concurrency:
 env:
   AMPER_BOOTSTRAP_CACHE_DIR: ${{ github.workspace }}/.amper/boot-cache
   AMPER_SHARED_CACHE_DIR: ${{ github.workspace }}/.amper/shared-cache
+  AMPER_OVERRIDE_MAVEN_CENTRAL_URL_TO_CACHE_REDIRECTOR: true
   AMPER_TASK: ${{ inputs.task || 'package' }}
 
 jobs:
